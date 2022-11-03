@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/father_layout"
+    >
+
+    <RelativeLayout
+        android:id="@+id/temp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white">
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_above="@+id/constraintLayout2"
+        android:layout_below="@+id/temp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="@color/light_grey">
+
+        <FrameLayout
+            android:id="@+id/index_body_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+    </RelativeLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_alignBottom="@+id/father_layout"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="1dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="MissingConstraints,NotSibling"
+        tools:layout_editor_absoluteX="0dp">
+
+        <ImageButton
+            android:id="@+id/navigation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/cardview_shadow_end_color"
+            android:src="@mipmap/navigation_black"
+            app:layout_constraintEnd_toStartOf="@+id/qrcode"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/navigation_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="导航"
+            android:textColor="@color/grey"
+            app:layout_constraintEnd_toEndOf="@+id/navigation"
+            app:layout_constraintStart_toStartOf="@+id/navigation"
+            app:layout_constraintTop_toBottomOf="@+id/navigation" />
+
+        <ImageButton
+            android:id="@+id/qrcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/cardview_shadow_end_color"
+            android:src="@mipmap/qrcode_black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/qrcode_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设备"
+            android:textColor="@color/grey"
+            app:layout_constraintEnd_toEndOf="@+id/qrcode"
+            app:layout_constraintStart_toStartOf="@+id/qrcode"
+            app:layout_constraintTop_toBottomOf="@+id/qrcode" />
+
+        <ImageButton
+            android:id="@+id/mine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/cardview_shadow_end_color"
+            android:src="@mipmap/mine_black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/qrcode"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/mine_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的"
+            android:textColor="@color/grey"
+            app:layout_constraintEnd_toEndOf="@+id/mine"
+            app:layout_constraintStart_toStartOf="@+id/mine"
+            app:layout_constraintTop_toBottomOf="@+id/mine" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
