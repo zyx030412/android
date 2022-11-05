@@ -1,7 +1,10 @@
 package com.example.track.service;
 
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
+import com.alibaba.fastjson.JSON;
 import com.example.track.entity.User;
 import com.example.track.interfac.VolleyCallback;
 
@@ -18,7 +21,7 @@ import okhttp3.Response;
 public class LoginService {
     public final OkHttpClient client = new OkHttpClient();
 
-    public void login(final VolleyCallback callback, String username, String password){
+    public void login(Handler handler,String username, String password){
         //启用子线程
         new Thread(new Runnable() {
             @Override
@@ -33,8 +36,8 @@ public class LoginService {
                 //创建http客户端
 
                 //创建http请求
-                MediaType JSON = MediaType.parse("application/json");
-                RequestBody body = RequestBody.create(JSON,json);
+                MediaType jsonType = MediaType.parse("application/json");
+                RequestBody body = RequestBody.create(jsonType,json);
 
                 //post请求?
                 Request request = new Request.Builder().url("http://120.25.145.148:8078/check_login?username="+user.getUsername()+"&password="+user.getPassword())
@@ -46,12 +49,25 @@ public class LoginService {
                     @Override
                     public void onFailure(Call call, IOException e) {
                         Log.d("login","onFailure");
+                        Message onFailure = new Message();
+                        onFailure.what = 0;
+                        handler.sendMessage(onFailure);
                     }
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException{
-                        Log.d("login","onResponse");
-                        callback.onSuccess(response.body().string());
+                        String body = response.body().string();
+                        if (body.equals("") && body != null){
+                            Message fail = new Message();
+                            fail.what = 2;
+                            handler.sendMessage(fail);
+                        }else{
+                            User user = JSON.parseObject(body,User.class);
+                            Message success = new Message();
+                            success.what = 1;
+                            success.obj = user;
+                            handler.sendMessage(success);
+                        }
                     }
                 });
 

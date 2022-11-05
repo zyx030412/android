@@ -3,8 +3,6 @@ package com.example.track.db;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
-import java.util.Date;
-import java.util.UUID;
 
 public class DemoCursorWrapper extends CursorWrapper {
     /**

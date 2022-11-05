@@ -1,10 +1,14 @@
 package com.example.track;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +21,7 @@ import com.example.track.interfac.VolleyCallback;
 import com.example.track.service.LoginService;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -30,7 +35,24 @@ public class LoginActivity extends AppCompatActivity {
     private ImageButton help,qqLogin,wechatLogin,alipayLogin;
     private EditText username,password;
     private Button loginButton,forgetLogin,register,messageLogin;
+    private Handler handler1 = new Handler(Looper.myLooper()){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
 
+            if (msg.what == 0){
+                Toast.makeText(LoginActivity.this,"网络请求失败",Toast.LENGTH_SHORT).show();
+            }else if (msg.what == 2){
+                Toast.makeText(LoginActivity.this,"用户名或密码有误",Toast.LENGTH_SHORT).show();
+            }else if(msg.what == 1){
+                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                User user = (User) msg.obj;
+                intent.putExtra("user", (Serializable) user);
+                finish();
+                startActivity(intent);
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,20 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                 String usn = String.valueOf(username.getText());
                 String pwd = String.valueOf(password.getText());
                 LoginService loginService = new LoginService();
-                loginService.login(new VolleyCallback() {
-                    @Override
-                    public void onSuccess(String result) {
-                        if (result==null||result.equals("")) {
-                            Looper.prepare();
-                            Toast.makeText(LoginActivity.this,"登陆失败",Toast.LENGTH_SHORT).show();
-                            Looper.loop();
-                        }else{
-                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                            finish();
-                            startActivity(intent);
-                        }
-                    }
-                },usn,pwd);
+                loginService.login(handler1,usn,pwd);
 
 
             }
