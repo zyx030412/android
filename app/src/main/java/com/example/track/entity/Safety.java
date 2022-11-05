@@ -1,8 +1,9 @@
 package com.example.track.entity;
 
 
+import java.io.Serializable;
 
-public class Safety {
+public class Safety implements Serializable {
     int id;
     String temperature;
     String insert_time;

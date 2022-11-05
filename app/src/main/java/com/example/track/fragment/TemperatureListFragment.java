@@ -83,7 +83,7 @@ public class TemperatureListFragment extends Fragment {//import androidx.fragmen
         }
     }
     private class TemperatureAdapter extends RecyclerView.Adapter<TemperatureHolder>{
-        private List<Safety> safetyList;//????????
+        private List<Safety> safetyList;
         public TemperatureAdapter(List<Safety> safeties){
             safetyList=safeties;
         }

@@ -77,8 +77,8 @@ public class LoginActivity extends AppCompatActivity {
                 String usn = String.valueOf(username.getText());
                 String pwd = String.valueOf(password.getText());
                 LoginService loginService = new LoginService();
-                loginService.login(handler1,usn,pwd);
 
+                loginService.login(handler1,usn,pwd);
 
             }
         });
