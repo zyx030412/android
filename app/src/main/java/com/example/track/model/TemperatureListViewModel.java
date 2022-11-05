@@ -8,7 +8,7 @@ import android.util.Log;
 import com.alibaba.fastjson.JSONArray;
 import androidx.lifecycle.ViewModel;
 
-import com.example.track.db.MySql_application;
+import com.example.track.db.MysqlApplication;
 import com.example.track.entity.Safety;
 
 import java.sql.Connection;
@@ -66,7 +66,7 @@ public class TemperatureListViewModel extends ViewModel {
 
 //    提取数据
     public List<Safety> getSafetyList(String time) throws InterruptedException {//给外部一个接口
-        search_time=time;
+        search_time = time;
         Thread thread2 = new Thread(new JoinRunnable2());
         thread2.start();
         thread2.join();
@@ -79,7 +79,7 @@ public class TemperatureListViewModel extends ViewModel {
             Log.d(TAG, "线程名字getText():" + Thread.currentThread().getName());
             String result  ;
             ResultSet rs = null;
-                Connection connection= MySql_application.getConn();
+                Connection connection= MysqlApplication.getConn();
             try {
                 Statement stmt = connection.createStatement();//
                 String sql="SELECT id,temperature,insert_time,warning_flag FROM safety_long WHERE insert_time LIKE '%"+search_time+"%'";
@@ -87,7 +87,7 @@ public class TemperatureListViewModel extends ViewModel {
                     sql="SELECT id,temperature,insert_time,warning_flag FROM safety_long";
                 Log.d("testid","sql:"+sql);
                 rs = stmt.executeQuery(sql);
-                result = MySql_application.convertList(rs);//直接转化为List<T>
+                result = MysqlApplication.convertList(rs);//直接转化为List<T>
                 System.out.println("result:"+result);
 //                将json格式的String转化为List<T>
                 mSafetyList = JSONArray.parseArray(result, Safety.class);
