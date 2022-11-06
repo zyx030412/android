@@ -66,7 +66,7 @@
                 tools:ignore="MissingConstraints" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -75,52 +75,48 @@
             <Button
                 android:id="@+id/qrcode_item1"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="98dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/background_blue"
                 android:text="车辆状态"
                 android:textColor="@color/more_grey"
                 android:textSize="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="MissingConstraints" />
+                android:layout_weight="1"/>
 
             <Button
                 android:id="@+id/qrcode_item2"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="98dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/background_blue"
                 android:text="我的行程"
                 android:textColor="@color/more_grey"
                 android:textSize="20dp"
-                app:layout_constraintStart_toEndOf="@+id/qrcode_item1"
-                tools:ignore="MissingConstraints" />
+                android:layout_weight="1"/>
 
             <Button
                 android:id="@+id/qrcode_item3"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="98dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/background_blue"
                 android:text="车辆健康"
                 android:textColor="@color/more_grey"
                 android:textSize="20dp"
-                app:layout_constraintStart_toEndOf="@+id/qrcode_item2"
-                tools:ignore="MissingConstraints"/>
+                android:layout_weight="1"/>
 
             <Button
                 android:id="@+id/qrcode_item4"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="98dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/background_blue"
                 android:text="视角盲区"
                 android:textColor="@color/more_grey"
                 android:textSize="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/qrcode_item3"
-                tools:ignore="MissingConstraints" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                tools:ignore="MissingConstraints"
+                android:layout_weight="1" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout

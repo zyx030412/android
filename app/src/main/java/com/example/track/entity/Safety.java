@@ -50,4 +50,14 @@ public class Safety implements Serializable {
     public void setWarning_flag(int warning_flag) {
         this.warning_flag = warning_flag;
     }
+
+    @Override
+    public String toString() {
+        return "Safety{" +
+                "id=" + id +
+                ", temperature='" + temperature + '\'' +
+                ", insert_time='" + insert_time + '\'' +
+                ", warning_flag=" + warning_flag +
+                '}';
+    }
 }

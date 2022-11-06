@@ -88,6 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/call"
+                android:id="@+id/body_qrcode_item1_image_call"
                 tools:ignore="MissingConstraints"
                 android:background="@color/white"
                 android:layout_weight="1"/>
@@ -95,6 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/sos"
+                android:id="@+id/body_qrcode_item1_image_sos"
                 tools:ignore="MissingConstraints"
                 android:background="@color/white"
                 android:layout_weight="1"/>
@@ -102,6 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/fix"
+                android:id="@+id/body_qrcode_item1_image_fix"
                 tools:ignore="MissingConstraints"
                 android:background="@color/white"
                 android:layout_weight="1"/>
@@ -127,6 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/white"
+                android:id="@+id/body_qrcode_item1_button_call"
                 style="?android:attr/borderlessButtonStyle"
                 android:src="@mipmap/call"
                 android:text="紧急联系人"
@@ -139,6 +143,7 @@
                 android:layout_weight="1"
                 android:background="@color/white"
                 android:src="@mipmap/call"
+                android:id="@+id/body_qrcode_item1_button_sos"
                 style="?android:attr/borderlessButtonStyle"
                 android:text="呼叫救援"
                 android:textColor="@color/grey"
@@ -151,6 +156,7 @@
                 android:src="@mipmap/call"
                 style="?android:attr/borderlessButtonStyle"
                 android:text="维修查询"
+                android:id="@+id/body_qrcode_item1_button_fix"
                 android:textColor="@color/grey"
                 android:textSize="17dp" />
             <Button
