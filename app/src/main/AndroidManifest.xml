@@ -64,13 +64,13 @@
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".NavigationActivity"
             android:exported="false" />
         <activity
             android:name=".InputTipsActivity"
             android:exported="false" />
         <activity
-            android:name=".NavigationActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

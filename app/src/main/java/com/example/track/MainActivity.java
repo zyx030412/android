@@ -21,6 +21,7 @@ import com.example.track.entity.Safety;
 import com.example.track.entity.User;
 import com.example.track.fragment.HomepageBodyFragment;
 import com.example.track.fragment.MineBodyFragment;
+import com.example.track.fragment.NavigationFragment;
 import com.example.track.fragment.QrcodeBodyFragment;
 import com.example.track.service.MainActivityUpdateService;
 
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = fragmentManager.findFragmentById(R.id.index_body_fragment_container);
 
         //Fragment页面的添加
-        Fragment homepageFragment = new HomepageBodyFragment();
+        Fragment homepageFragment = new NavigationFragment();
         Fragment qrcodeFragment = new QrcodeBodyFragment();
         Fragment mineFragment = new MineBodyFragment();
         fragmentManager.beginTransaction().add(R.id.index_body_fragment_container,mineFragment).commit();
