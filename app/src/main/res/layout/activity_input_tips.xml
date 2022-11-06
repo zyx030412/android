@@ -35,8 +35,7 @@
             android:imeOptions="actionSearch"
             android:inputType="textCapWords"
             android:singleLine="true"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:background="@color/white"
             app:queryHint="请输入关键字"
             app:searchIcon="@null" />
     </LinearLayout>
@@ -45,7 +44,8 @@
         android:id="@+id/inputtip_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="5dp"
+        android:background="@color/white">
 
     </ListView>
 
