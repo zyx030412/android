@@ -2,5 +2,5 @@
 
     <string name="app_name">Track</string>
     <string name="home">Track</string>
-
+    <string name="no_result">对不起，没有搜索到相关数据！</string>
 </resources>
