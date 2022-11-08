@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.track.entity.Safety;
+import com.example.track.entity.Temperature;
 import com.example.track.model.TemperatureListViewModel;
 import com.example.track.model.datepicker.CustomDatePicker;
 import com.example.track.model.datepicker.DateFormatUtils;
@@ -44,7 +44,7 @@ public class Temperature1Activity extends Activity implements View.OnClickListen
     private LineDataSet lineDataSet;
     private YAxis yAxis;
     private Button testButton;
-    private List<Safety> mSafetyList;
+    private List<Temperature> mSafetyList;
     private String search_time;//时间选择器选择的时间
     //    private String weeks[];//X轴()
 //    private float datas[];//Y轴

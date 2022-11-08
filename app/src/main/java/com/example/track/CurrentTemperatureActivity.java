@@ -22,9 +22,9 @@ public class CurrentTemperatureActivity extends AppCompatActivity {
      * 初始化对象
      */
     public void init(){
-        cirStatisticGraph = (CirStatisticGraph) findViewById(R.id.CirStatisticGraph);
+        cirStatisticGraph = findViewById(R.id.CirStatisticGraph);
 
         mCurrentTemperature = findViewById(R.id.view_221);
-        LinearLayout layout_view=findViewById(R.id.activity_currentTemp_view);
+        LinearLayout layout_view = findViewById(R.id.activity_currentTemp_view);
     }
 }

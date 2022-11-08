@@ -10,14 +10,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.track.R;
-import com.example.track.entity.Safety;
+import com.example.track.entity.Temperature;
 
 public class TemperatureFragment extends Fragment {
-    private Safety mSafety;
+    private Temperature mSafety;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mSafety = new Safety();
+        mSafety = new Temperature();
     }
 
     @Nullable

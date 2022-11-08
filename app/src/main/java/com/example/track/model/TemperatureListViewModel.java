@@ -9,7 +9,7 @@ import com.alibaba.fastjson.JSONArray;
 import androidx.lifecycle.ViewModel;
 
 import com.example.track.db.MySqlDBUtils;
-import com.example.track.entity.Safety;
+import com.example.track.entity.Temperature;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -20,11 +20,11 @@ import java.util.List;
 public class TemperatureListViewModel extends ViewModel {
     private static final String TAG1 ="TemperatureListViewModel";
     //变量定义
-    private List<Safety> mSafetyList;
+    private List<Temperature> mSafetyList;
     private String curTemperature;
     private String search_time;
     //    提取数据所有温度数据
-    public List<Safety> getSafetyList(String time) throws InterruptedException {//给外部一个接口
+    public List<Temperature> getSafetyList(String time) throws InterruptedException {//给外部一个接口
         search_time=time;
         Thread thread2 = new Thread(new JoinRunnable2());
         thread2.start();
@@ -49,8 +49,8 @@ public class TemperatureListViewModel extends ViewModel {
                 result = MySqlDBUtils.convertList(rs);//直接转化为List<T>
                 System.out.println("result:"+result);
 //                将json格式的String转化为List<T>
-                mSafetyList = JSONArray.parseArray(result, Safety.class);
-                Log.d("test","class:"+Safety.class);
+                mSafetyList = JSONArray.parseArray(result, Temperature.class);
+                Log.d("test","class:"+ Temperature.class);
                 System.out.println("mSafetyList"+mSafetyList.get(1).getInsert_time());//没有转化成功
                 rs.close();
                 stmt.close();

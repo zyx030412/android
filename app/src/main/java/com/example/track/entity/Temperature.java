@@ -3,20 +3,20 @@ package com.example.track.entity;
 
 import java.io.Serializable;
 
-public class Safety implements Serializable {
+public class Temperature implements Serializable {
     int id;
     String temperature;
     String insert_time;
     int warning_flag;
 
-    public Safety(int id, String temperature, String insert_time, int warning_flag) {
+    public Temperature(int id, String temperature, String insert_time, int warning_flag) {
         this.id = id;
         this.temperature = temperature;
         this.insert_time = insert_time;
         this.warning_flag = warning_flag;
     }
 
-    public Safety() {
+    public Temperature() {
     }
 
     public int getId() {
@@ -53,7 +53,7 @@ public class Safety implements Serializable {
 
     @Override
     public String toString() {
-        return "Safety{" +
+        return "Temperature{" +
                 "id=" + id +
                 ", temperature='" + temperature + '\'' +
                 ", insert_time='" + insert_time + '\'' +

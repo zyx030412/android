@@ -5,27 +5,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.track.entity.Safety;
+import com.example.track.entity.Temperature;
 import com.example.track.entity.User;
-import com.example.track.fragment.HomepageBodyFragment;
 import com.example.track.fragment.MineBodyFragment;
 import com.example.track.fragment.NavigationFragment;
 import com.example.track.fragment.QrcodeBodyFragment;
 import com.example.track.service.MainActivityUpdateService;
 
-import java.io.Serializable;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -33,7 +29,7 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
     private ImageButton mine,navigation,qrcode;
     private TextView mineText,homepageText,qrcodeText;
-    private User user;
+    private static User user = new User(2,"18345264895","123321");
     private Handler handler1 = new Handler(Looper.myLooper()){
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -43,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (msg.what == 2) {
                 Toast.makeText(MainActivity.this, "没有数据", Toast.LENGTH_SHORT).show();
             } else if (msg.what == 1) {
-                Safety safety = (Safety) msg.obj;
+                Temperature safety = (Temperature) msg.obj;
                 int ifOverHeated = safety.getWarning_flag();
                 if (ifOverHeated == 0) {
                     Toast.makeText(MainActivity.this,"刹车片过热",Toast.LENGTH_SHORT).show();
@@ -145,6 +141,9 @@ public class MainActivity extends AppCompatActivity {
 
 //        new MainActivityUpdateService(handler1);
 
+    }
+    public static String getUser(){
+        return user.getUsername();
     }
 
 

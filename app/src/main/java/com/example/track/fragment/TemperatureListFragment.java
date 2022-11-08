@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.track.R;
-import com.example.track.entity.Safety;
+import com.example.track.entity.Temperature;
 import com.example.track.model.TemperatureListViewModel;
 
 import java.util.List;
@@ -29,7 +29,7 @@ public class TemperatureListFragment extends Fragment {//import androidx.fragmen
     private TemperatureListViewModel mTemperatureListViewModel;
     RecyclerView mTemperatureRecyclerView;
     private TemperatureAdapter mTemperatureAdapter;
-    private List<Safety> safetyList;
+    private List<Temperature> safetyList;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +65,7 @@ public class TemperatureListFragment extends Fragment {//import androidx.fragmen
     private TextView mTemperatureTextView_list_item_temperature;
     private TextView mInsertTimeTextView_list_item_temperature;
     private LinearLayout mLinearLayout_list_item_temperature;
-    private Safety mSafety;
+    private Temperature mSafety;
         public TemperatureHolder(View itemView){
             super(itemView);
             itemView.setOnClickListener(view -> Toast.makeText(getContext(),"已点击查看明细！!",Toast.LENGTH_SHORT).show());//通过lambda设置监听器
@@ -73,7 +73,7 @@ public class TemperatureListFragment extends Fragment {//import androidx.fragmen
             mTemperatureTextView_list_item_temperature=itemView.findViewById(R.id.temperature_data);
             mInsertTimeTextView_list_item_temperature=itemView.findViewById(R.id.temperature_insert_time);
         }
-        public void bind(Safety safety){
+        public void bind(Temperature safety){
             mSafety=safety;
             mTemperatureTextView_list_item_temperature.setText(mSafety.getTemperature());
             mInsertTimeTextView_list_item_temperature.setText(mSafety.getInsert_time());
@@ -83,8 +83,8 @@ public class TemperatureListFragment extends Fragment {//import androidx.fragmen
         }
     }
     private class TemperatureAdapter extends RecyclerView.Adapter<TemperatureHolder>{
-        private List<Safety> safetyList;
-        public TemperatureAdapter(List<Safety> safeties){
+        private List<Temperature> safetyList;
+        public TemperatureAdapter(List<Temperature> safeties){
             safetyList=safeties;
         }
         @NonNull
@@ -96,7 +96,7 @@ public class TemperatureListFragment extends Fragment {//import androidx.fragmen
 
         @Override
         public void onBindViewHolder(@NonNull TemperatureHolder holder, int position) {//当前滑动的位置
-            Safety safety= safetyList.get(position);
+            Temperature safety= safetyList.get(position);
             holder.bind(safety);
 //            holder.mTemperatureTextView_list_item_temperature.setText(safety.getTemperature()+"°C");
 //            holder.mInsertTimeTextView_list_item_temperature.setText(safety.getInsert_time());

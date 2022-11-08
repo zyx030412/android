@@ -18,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="2"
+        android:orientation="vertical"
         >
 
         <com.example.track.model.View.CirStatisticGraph
@@ -29,7 +30,7 @@
         </com.example.track.model.View.CirStatisticGraph>
     </LinearLayout>
 
-    <Space
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"

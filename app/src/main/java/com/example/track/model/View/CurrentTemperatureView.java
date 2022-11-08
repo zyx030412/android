@@ -112,15 +112,13 @@ public class CurrentTemperatureView extends SurfaceView {
 
         // 中心进度文本和评级画笔
         progressTextPaint = new Paint();
-        progressTextPaint.setColor(Color.WHITE);
-        progressTextPaint.setStyle(Paint.Style.STROKE);
+        progressTextPaint.setColor(Color.parseColor("#0990FF"));
         progressTextPaint.setStrokeWidth(0);
         progressTextPaint.setTypeface(Typeface.DEFAULT_BOLD);
 
         // 指示器画笔????
         flagPaint = new Paint();
-        flagPaint.setColor(Color.WHITE);
-        flagPaint.setStyle(Paint.Style.STROKE);
+        flagPaint.setColor(Color.parseColor("#0990FF"));
         flagPaint.setStrokeWidth(3);
         flagPaint.setAntiAlias(true);
 //        对象
@@ -175,17 +173,14 @@ public class CurrentTemperatureView extends SurfaceView {
             //父容器没有对当前View有任何限制，当前View可以任意取尺寸
             case MeasureSpec.UNSPECIFIED:
                 mSize = defaultSize;
-                Log.d(TAG,"父容器没有对当前View有任何限制，当前View可以任意取尺寸");
                 break;
             //View能取得的最大尺寸
             case MeasureSpec.AT_MOST:
                 mSize = size;
-                Log.d(TAG,"View能取得的最大尺寸");
                 break;
             //当前的尺寸就是当前View应该取的尺寸
             case MeasureSpec.EXACTLY:
                 mSize = size;
-                Log.d(TAG,"当前的尺寸就是当前View应该取的尺寸在这种模式下，尺寸的值是多少，那么这个组件的长或宽就是多少。");
                 break;
         }
         return mSize;
@@ -225,8 +220,6 @@ public class CurrentTemperatureView extends SurfaceView {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.mid);
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
-        Log.e("width","width:"+width);
-        Log.e("height","height:"+height);
         //设置想要的大小
         int newWidth=600;
         int newHeight=260;
@@ -243,8 +236,6 @@ public class CurrentTemperatureView extends SurfaceView {
         bitmap=Bitmap.createBitmap(bitmap,0,0,width,height,matrix,true);
         bitmap.getWidth();
         bitmap.getHeight();
-        Log.e("newWidth","newWidth"+bitmap.getWidth());
-        Log.e("newHeight","newHeight"+bitmap.getHeight());
         return bitmap;
     }
 
@@ -252,9 +243,7 @@ public class CurrentTemperatureView extends SurfaceView {
      * 提取当前温度
      */
     public void getCurTemperature() throws InterruptedException {
-        Log.d("result：","getCurTemperature()");
         curTemperature= mTemperatureListViewModel.getCurTemperature();
-        Log.d(TAG,"curTemperature:"+curTemperature);
     }
     /**
      *刷新view
@@ -269,7 +258,6 @@ public class CurrentTemperatureView extends SurfaceView {
 //                在跳转页面的时候关闭
 //简单来说，invalidate()方法可以从UI线程调用，postInvalidate()可以从非UI线程调用，以告诉android在对其进行一些更改后更新我们的自定义视图。
                 postInvalidate();
-                Log.d(TAG,"start()_curTemperature:"+curTemperature);
             }
         };
         timer.schedule(timerTask, 0, 6000);
@@ -280,7 +268,6 @@ public class CurrentTemperatureView extends SurfaceView {
 
         // 很重要的一个半径(最外层环即里程环的半径)
         float sroundRadius = radius + paintWidth / 2 - genPaintWidth / 2;
-        Log.d(TAG,"sroundRadius:"+sroundRadius);
         // 比重环（绿色24.00/黄色28.00/红色）
         genPaint.setColor(Color.argb(0xEE, 0xFF, 0x35, 0x9A));
         RectF oval1 = new RectF(centerPoint.x- sroundRadius, centerPoint.y
@@ -326,11 +313,9 @@ public class CurrentTemperatureView extends SurfaceView {
 
         // 环中心进度文本（动态迭加的）
         String curPercent = curTemperature;
-        Log.d("环中心进度文本:","环中心进度文本");
         progressTextPaint.setTextSize(45);
 //        Paint的measureText()方法取得字符串显示的宽度值
         float ww = progressTextPaint.measureText(curPercent + "℃");
-        Log.d(TAG,"ww:"+ww);
 //        根据ww计算位置
         canvas.drawText(curPercent + "℃", centerPoint.x - ww / 2,
                 centerPoint.y, progressTextPaint);
@@ -350,7 +335,6 @@ public class CurrentTemperatureView extends SurfaceView {
 
         // 很重要的一个半径(最外层环即里程环的半径)
         float sroundRadius = radius + paintWidth / 2 - genPaintWidth / 2;
-        Log.d(TAG,"sroundRadius:"+sroundRadius);
         // 比重环（绿色24.00/黄色28.00/红色）
         genPaint.setColor(Color.argb(0xEE, 0xFF, 0x35, 0x9A));
         RectF oval1 = new RectF(centerPoint2.x- sroundRadius, centerPoint2.y
@@ -396,11 +380,9 @@ public class CurrentTemperatureView extends SurfaceView {
 
         // 环中心进度文本（动态迭加的）
         String curPercent = curTemperature;
-        Log.d("环中心进度文本:","环中心进度文本");
         progressTextPaint.setTextSize(45);
 //        Paint的measureText()方法取得字符串显示的宽度值
         float ww = progressTextPaint.measureText(curPercent + "℃");
-        Log.d(TAG,"ww:"+ww);
 //        根据ww计算位置
         canvas.drawText(curPercent + "℃", centerPoint2.x - ww / 2,
                 centerPoint2.y, progressTextPaint);
@@ -420,7 +402,6 @@ public class CurrentTemperatureView extends SurfaceView {
 
         // 很重要的一个半径(最外层环即里程环的半径)
         float sroundRadius = radius + paintWidth / 2 - genPaintWidth / 2;
-        Log.d(TAG,"sroundRadius:"+sroundRadius);
         // 比重环（绿色24.00/黄色28.00/红色）
         genPaint.setColor(Color.argb(0xEE, 0xFF, 0x35, 0x9A));
         RectF oval1 = new RectF(centerPoint3.x- sroundRadius, centerPoint3.y
@@ -466,11 +447,9 @@ public class CurrentTemperatureView extends SurfaceView {
 
         // 环中心进度文本（动态迭加的）
         String curPercent = curTemperature;
-        Log.d("环中心进度文本:","环中心进度文本");
         progressTextPaint.setTextSize(45);
 //        Paint的measureText()方法取得字符串显示的宽度值
         float ww = progressTextPaint.measureText(curPercent + "℃");
-        Log.d(TAG,"ww:"+ww);
 //        根据ww计算位置
         canvas.drawText(curPercent + "℃", centerPoint3.x - ww / 2,
                 centerPoint3.y, progressTextPaint);

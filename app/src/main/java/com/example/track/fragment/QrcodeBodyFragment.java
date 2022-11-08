@@ -22,7 +22,7 @@ import com.example.track.R;
 public class QrcodeBodyFragment extends Fragment {
 
     private Button button1,button2,button3,button4;
-    private ViewPager viewPager;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,6 +35,11 @@ public class QrcodeBodyFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_body_qrcode,container,false);
 
+        FragmentManager fragmentManager = getParentFragmentManager();
+        Fragment fragment1 = new QrcodeBodyItem1Fragment();
+        Fragment fragment2 = new QrcodeBodyItem2Fragment();
+        Fragment fragment3 = new QrcodeBodyItem3Fragment();
+        Fragment fragment4 = new QrcodeBodyItem4Fragment();
     //绑定实例
         button1 = v.findViewById(R.id.qrcode_item1);
         button2 = v.findViewById(R.id.qrcode_item2);
@@ -42,60 +47,18 @@ public class QrcodeBodyFragment extends Fragment {
         button4 = v.findViewById(R.id.qrcode_item4);
 
         button1.setTextColor(Color.parseColor("#000000"));
-        viewPager = v.findViewById(R.id.fragment_body_qrcode_viewpager);
         FragmentManager fm = getChildFragmentManager();
 
-        //pager分页设置
-        viewPager.setAdapter(new FragmentStatePagerAdapter(fm) {
 
-            private Fragment[] fragments = new Fragment[]{
-                    new QrcodeBodyItem1Fragment(),
-                    new QrcodeBodyItem2Fragment(),
-                    new QrcodeBodyItem3Fragment(),
-                    new QrcodeBodyItem4Fragment(),
-            };
-
-            @NonNull
-            @Override
-            public Fragment getItem(int position) {
-
-                return fragments[position];
-            }
-
-            @Override
-            public int getCount() {
-                return fragments.length;
-            }
-        });
-
-        //设置当前页
-        viewPager.setCurrentItem(0);
-        //取消点击/滑动事件
-        viewPager.setOnTouchListener(new View.OnTouchListener(){
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event){
-                return true;
-            }
-        });
-
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+        fragmentManager.beginTransaction().add(R.id.fragment_body_qrcode_frame,fragment1).commit();
+        fragmentManager.beginTransaction().hide(fragment1).commit();
+        fragmentManager.beginTransaction().add(R.id.fragment_body_qrcode_frame,fragment2).commit();
+        fragmentManager.beginTransaction().hide(fragment2).commit();
+        fragmentManager.beginTransaction().add(R.id.fragment_body_qrcode_frame,fragment3).commit();
+        fragmentManager.beginTransaction().hide(fragment3).commit();
+        fragmentManager.beginTransaction().add(R.id.fragment_body_qrcode_frame,fragment4).commit();
+        fragmentManager.beginTransaction().hide(fragment4).commit();
+        fragmentManager.beginTransaction().show(fragment1).commit();
 
 
         button1.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +68,10 @@ public class QrcodeBodyFragment extends Fragment {
                 button2.setTextColor(Color.parseColor("#737373"));
                 button3.setTextColor(Color.parseColor("#737373"));
                 button4.setTextColor(Color.parseColor("#737373"));
-                viewPager.setCurrentItem(0);
+                fragmentManager.beginTransaction().hide(fragment2).commit();
+                fragmentManager.beginTransaction().hide(fragment3).commit();
+                fragmentManager.beginTransaction().hide(fragment4).commit();
+                fragmentManager.beginTransaction().show(fragment1).commit();
             }
         });
 
@@ -116,7 +82,10 @@ public class QrcodeBodyFragment extends Fragment {
                 button2.setTextColor(Color.parseColor("#000000"));
                 button3.setTextColor(Color.parseColor("#737373"));
                 button4.setTextColor(Color.parseColor("#737373"));
-                viewPager.setCurrentItem(1);
+                fragmentManager.beginTransaction().hide(fragment1).commit();
+                fragmentManager.beginTransaction().hide(fragment3).commit();
+                fragmentManager.beginTransaction().hide(fragment4).commit();
+                fragmentManager.beginTransaction().show(fragment2).commit();
             }
         });
 
@@ -127,7 +96,10 @@ public class QrcodeBodyFragment extends Fragment {
                 button2.setTextColor(Color.parseColor("#737373"));
                 button3.setTextColor(Color.parseColor("#000000"));
                 button4.setTextColor(Color.parseColor("#737373"));
-                viewPager.setCurrentItem(2);
+                fragmentManager.beginTransaction().hide(fragment2).commit();
+                fragmentManager.beginTransaction().hide(fragment1).commit();
+                fragmentManager.beginTransaction().hide(fragment4).commit();
+                fragmentManager.beginTransaction().show(fragment3).commit();
             }
         });
 
@@ -138,7 +110,10 @@ public class QrcodeBodyFragment extends Fragment {
                 button2.setTextColor(Color.parseColor("#737373"));
                 button3.setTextColor(Color.parseColor("#737373"));
                 button4.setTextColor(Color.parseColor("#000000"));
-                viewPager.setCurrentItem(3);
+                fragmentManager.beginTransaction().hide(fragment2).commit();
+                fragmentManager.beginTransaction().hide(fragment3).commit();
+                fragmentManager.beginTransaction().hide(fragment1).commit();
+                fragmentManager.beginTransaction().show(fragment4).commit();
             }
         });
 

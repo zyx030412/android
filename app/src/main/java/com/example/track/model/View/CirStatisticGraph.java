@@ -112,8 +112,7 @@ public class CirStatisticGraph extends View {
 
         // 指示器画笔????
         flagPaint = new Paint();
-        flagPaint.setColor(Color.WHITE);
-        flagPaint.setStyle(Paint.Style.STROKE);
+        flagPaint.setColor(Color.parseColor("#0990FF"));
         flagPaint.setStrokeWidth(3);
         flagPaint.setAntiAlias(true);
 

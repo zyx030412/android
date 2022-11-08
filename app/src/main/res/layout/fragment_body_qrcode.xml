@@ -115,21 +115,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            >
-
-
-            <androidx.viewpager.widget.ViewPager
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/fragment_body_qrcode_viewpager"
+                android:id="@+id/fragment_body_qrcode_frame"
                 android:background="@color/white"/>
 
-        </LinearLayout>
     </LinearLayout>
 
 
