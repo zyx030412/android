@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MysqlApplication {
+public class MySqlDBUtils {
     //    数据库驱动
     private static final String HOST = "jdbc:mysql://120.25.145.148:3306/test?serverTimezone=GMT%2B8";
     // 用户名

@@ -73,12 +73,53 @@ public class Item3RecycleViewAdapter extends RecyclerView.Adapter<Item3RecycleVi
                 }
             }
         });
+        holder.itemImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (position){
+                    case 0:
+                        Intent intent = new Intent(holder.itemView.getContext(), Temperature1Activity.class);
+                        holder.itemView.getContext().startActivity(intent);
+                        break;
+                    case 1:
+
+                }
+            }
+        });
+        holder.itemText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (position){
+                    case 0:
+                        Intent intent = new Intent(holder.itemView.getContext(), Temperature1Activity.class);
+                        holder.itemView.getContext().startActivity(intent);
+                        break;
+                    case 1:
+
+                }
+            }
+        });
+        holder.watch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (position){
+                    case 0:
+                        Intent intent = new Intent(holder.itemView.getContext(), Temperature1Activity.class);
+                        holder.itemView.getContext().startActivity(intent);
+                        break;
+                    case 1:
+
+                }
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
         return list.size();
     }
+
 
 
 }

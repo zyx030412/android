@@ -11,6 +11,8 @@
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/drawable/left_line.xml" value="0.1895" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/drawable/line.xml" value="0.264" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/drawable/line_gradient_bg_shape.xml" value="0.2545" />
+        <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/drawable/number_choose_button.xml" value="0.2125" />
+        <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/drawable/number_choose_button_blue.xml" value="0.2125" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/drawable/radio_register.xml" value="0.1525" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/drawable/radio_register_selected.xml" value="0.1525" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/drawable/retangle.xml" value="0.264" />
@@ -22,6 +24,7 @@
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/activity_position.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/activity_register.xml" value="0.33" />
+        <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/activity_set_car_info.xml" value="0.33" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/activity_temperature_data.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/adapter_inputtips.xml" value="0.2125" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/dialog_date_picker.xml" value="0.20364583333333333" />

@@ -42,9 +42,9 @@ public class MineBodyFragment extends Fragment {
     }
 
     private void initItems(){
-        Mine mine1 = new Mine(R.mipmap.change,"切换车辆类型");
+        Mine mine1 = new Mine(R.mipmap.change,"车辆添加");
         list.add(mine1);
-        Mine mine3 = new Mine(R.mipmap.set,"更改系统设置");
+        Mine mine3 = new Mine(R.mipmap.set,"系统设置");
         list.add(mine3);
 
     }

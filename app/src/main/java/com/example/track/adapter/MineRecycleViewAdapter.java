@@ -1,5 +1,7 @@
 package com.example.track.adapter;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.track.R;
+import com.example.track.SetTrackInfoActivity;
+import com.example.track.Temperature1Activity;
 import com.example.track.entity.Mine;
 
 import java.util.List;
@@ -48,12 +52,64 @@ public class MineRecycleViewAdapter extends RecyclerView.Adapter<MineRecycleView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Mine mine = list.get(position);
         holder.itemImage.setImageResource(mine.getImageId());
         holder.itemText.setText(mine.getTitle());
 //        if (position == list.size()-1)
 //            holder.line.setVisibility(View.GONE);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (position){
+                    case 0:
+                        Intent intent = new Intent(holder.itemView.getContext(), SetTrackInfoActivity.class);
+                        holder.itemView.getContext().startActivity(intent);
+                        break;
+                    case 1:
+
+                }
+            }
+        });
+        holder.itemImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (position){
+                    case 0:
+                        Intent intent = new Intent(holder.itemView.getContext(), SetTrackInfoActivity.class);
+                        holder.itemView.getContext().startActivity(intent);
+                        break;
+                    case 1:
+
+                }
+            }
+        });
+        holder.itemText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (position){
+                    case 0:
+                        Intent intent = new Intent(holder.itemView.getContext(), SetTrackInfoActivity.class);
+                        holder.itemView.getContext().startActivity(intent);
+                        break;
+                    case 1:
+
+                }
+            }
+        });
+        holder.enter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (position){
+                    case 0:
+                        Intent intent = new Intent(holder.itemView.getContext(), SetTrackInfoActivity.class);
+                        holder.itemView.getContext().startActivity(intent);
+                        break;
+                    case 1:
+
+                }
+            }
+        });
     }
 
     @Override

@@ -8,7 +8,7 @@ import android.util.Log;
 import com.alibaba.fastjson.JSONArray;
 import androidx.lifecycle.ViewModel;
 
-import com.example.track.db.MysqlApplication;
+import com.example.track.db.MySqlDBUtils;
 import com.example.track.entity.Safety;
 
 import java.sql.Connection;
@@ -79,7 +79,7 @@ public class TemperatureListViewModel extends ViewModel {
             Log.d(TAG, "线程名字getText():" + Thread.currentThread().getName());
             String result  ;
             ResultSet rs = null;
-                Connection connection= MysqlApplication.getConn();
+                Connection connection= MySqlDBUtils.getConn();
             try {
                 Statement stmt = connection.createStatement();//
                 String sql="SELECT id,temperature,insert_time,warning_flag FROM safety_long WHERE insert_time LIKE '%"+search_time+"%'";
@@ -87,7 +87,7 @@ public class TemperatureListViewModel extends ViewModel {
                     sql="SELECT id,temperature,insert_time,warning_flag FROM safety_long";
                 Log.d("testid","sql:"+sql);
                 rs = stmt.executeQuery(sql);
-                result = MysqlApplication.convertList(rs);//直接转化为List<T>
+                result = MySqlDBUtils.convertList(rs);//直接转化为List<T>
                 System.out.println("result:"+result);
 //                将json格式的String转化为List<T>
                 mSafetyList = JSONArray.parseArray(result, Safety.class);
