@@ -18,55 +18,14 @@ import java.sql.Statement;
 import java.util.List;
 
 public class TemperatureListViewModel extends ViewModel {
+    private static final String TAG1 ="TemperatureListViewModel";
     //变量定义
     private List<Safety> mSafetyList;
-    private String str;
+    private String curTemperature;
     private String search_time;
-////    数据库驱动
-//    private static final String HOST = "jdbc:mysql://120.25.145.148:3306/test?serverTimezone=GMT%2B8";
-//    // 用户名
-//    private static final String USER = "root";
-//    // 密码
-//    private static final String PASSWORD = "root";
-//    // Java数据库连接JDBC驱动
-//    private static final String DRIVER = "com.mysql.jdbc.Driver";
-//    private Connection connection;
-//
-//    public static Connection getConn(){//数据库驱动连接
-//        Connection connection = null;
-//        try{
-//            Class.forName(DRIVER);
-//            connection= DriverManager.getConnection(HOST, USER, PASSWORD);
-//
-//            Log.e("数据库连接", "成功!");
-//        } catch (Exception e) {
-//            Log.e("数据库连接", "失败!");
-//            e.printStackTrace();
-//        }
-//        return connection;
-//    }
-//
-//    public static  String convertList(ResultSet rs) throws SQLException {//返回List<T>(List<Bean>)数据
-//        List list = new ArrayList();//??
-//        ResultSetMetaData md = rs.getMetaData();//获取键名
-//        int columnCount = md.getColumnCount();//获取行的数量
-//        Log.d("数据库连接_数据条数", String.valueOf(columnCount));
-//        int coun = 0;
-//        while (rs.next()) {//遍历取数据
-//            Map rowData = new HashMap();//声明Map用List
-//            for (int i = 1; i <= columnCount; i++) {
-//                rowData.put(md.getColumnName(i), rs.getObject(i));//获取键名及值
-//            }
-//            list.add(rowData);
-//            coun++;
-//        }
-//        String json = JSON.toJSONString(list);//List<Map<String, Object>> 转化为json格式的String
-//               return json;
-//    }
-
-//    提取数据
+    //    提取数据所有温度数据
     public List<Safety> getSafetyList(String time) throws InterruptedException {//给外部一个接口
-        search_time = time;
+        search_time=time;
         Thread thread2 = new Thread(new JoinRunnable2());
         thread2.start();
         thread2.join();
@@ -79,7 +38,7 @@ public class TemperatureListViewModel extends ViewModel {
             Log.d(TAG, "线程名字getText():" + Thread.currentThread().getName());
             String result  ;
             ResultSet rs = null;
-                Connection connection= MySqlDBUtils.getConn();
+            Connection connection= MySqlDBUtils.getConn();
             try {
                 Statement stmt = connection.createStatement();//
                 String sql="SELECT id,temperature,insert_time,warning_flag FROM safety_long WHERE insert_time LIKE '%"+search_time+"%'";
@@ -105,4 +64,43 @@ public class TemperatureListViewModel extends ViewModel {
 
         }
     }
+
+    /**
+     *
+     */
+    public String getCurTemperature() throws InterruptedException {
+        Thread thread3 = new Thread(new JoinRunnable3_curTemperature());
+        thread3.start();
+        thread3.join();
+        return curTemperature;
+    }
+
+    class JoinRunnable3_curTemperature implements Runnable {
+        @Override
+        public void run() {
+            Log.d(TAG, "线程名字getText():" + Thread.currentThread().getName());
+            String result  ;
+            ResultSet rs = null;
+            Connection connection= MySqlDBUtils.getConn();
+            try {
+                Statement stmt = connection.createStatement();//
+                String sql="SELECT temperature FROM safety ";
+                rs = stmt.executeQuery(sql);
+                result = MySqlDBUtils.convertList(rs);//直接转化为List<T>
+                System.out.println("result:"+result);
+                Log.d("result：",result);
+                curTemperature=result.split("\"")[3];
+                rs.close();
+                stmt.close();
+                connection.close();
+                System.out.println("Database connected successfully!");
+            } catch (SQLException e) {
+                System.out.println(e);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+        }
+    }
+
 }
