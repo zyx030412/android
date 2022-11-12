@@ -11,7 +11,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.amap.api.maps.AMap;
@@ -24,6 +26,11 @@ import com.amap.api.maps.AMap.OnMarkerClickListener;
 import com.amap.api.maps.AMap.InfoWindowAdapter;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.maps.model.Poi;
+import com.amap.api.navi.AmapNaviPage;
+import com.amap.api.navi.AmapNaviParams;
+import com.amap.api.navi.AmapNaviType;
+import com.amap.api.navi.AmapPageType;
+import com.amap.api.navi.model.AMapCarInfo;
 import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.help.Tip;
@@ -63,10 +70,43 @@ public class NavigationFragment extends Fragment implements
     private TextView mKeywordsTextView;
     private Marker mPoiMarker;
     private ImageView mCleanKeyWords;
+    private RelativeLayout relativeLayout;
+    private Button navigationButton;
 
     public static final int REQUEST_CODE = 100;
     public static final int RESULT_CODE_INPUTTIPS = 101;
     public static final int RESULT_CODE_KEYWORDS = 102;
+
+    public AMap.OnMarkerClickListener mOnMarkerClickListener = new OnMarkerClickListener() {
+        @Override
+        public boolean onMarkerClick(Marker marker) {
+            relativeLayout.setVisibility(View.VISIBLE);
+            LatLng thisLatLng = marker.getPosition();
+            String title = marker.getTitle();
+            String poiId = marker.getId();
+            Poi end = new Poi(title,thisLatLng,poiId);
+            navigationButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AmapNaviParams params = new AmapNaviParams(null, null, end, AmapNaviType.DRIVER, AmapPageType.ROUTE);
+                    params.setCarInfo(new AMapCarInfo());
+                    /**
+                     * 设置播报模式
+                     * @param context
+                     * @param mode  1-简洁播报 2-详细播报 3-静音模式
+                     * @since 7.1.0
+                     */
+                    params.setRouteStrategy(2);
+                    // 启动组件
+                    AmapNaviPage.getInstance().showRouteActivity(getContext(), params, null);
+                    //设置退出导航组件时摧毁导航实例
+                    params.setNeedCalculateRouteWhenPresent(true);
+                    relativeLayout.setVisibility(View.GONE);
+                }
+            });
+            return false;
+        }
+    };
 
     @Nullable
     @Override
@@ -74,16 +114,11 @@ public class NavigationFragment extends Fragment implements
         View v = inflater.inflate(R.layout.map_demo,container,false);
         mCleanKeyWords = v.findViewById(R.id.clean_keywords);
         mCleanKeyWords.setOnClickListener(this);
+        relativeLayout = v.findViewById(R.id.map_navi_bottom);
+        navigationButton = v.findViewById(R.id.map_navi_button);
         init(v);
         mKeyWords = "";
-        MyLocationStyle myLocationStyle;
-        myLocationStyle = new MyLocationStyle();//初始化定位蓝点样式类
-        myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATE);//连续定位，且将视角移动到中央
-        myLocationStyle.interval(2000); //设置连续定位模式下的定位间隔，只在连续定位模式下生效，单次定位模式下不会生效。单位为毫秒。
-        myLocationStyle.showMyLocation(true);
-        mAMap.setMyLocationStyle(myLocationStyle);//设置定位蓝点的Style
-        mAMap.setMyLocationEnabled(true);// 设置为true表示启动显示定位蓝点，false表示隐藏定位蓝点并不进行定位，默认是false。
-
+        mAMap.setOnMarkerClickListener(mOnMarkerClickListener);
 
 
         return v;
@@ -111,6 +146,20 @@ public class NavigationFragment extends Fragment implements
         mAMap.setOnMarkerClickListener(this);// 添加点击marker监听事件
         mAMap.setInfoWindowAdapter(this);// 添加显示infowindow监听事件
         mAMap.getUiSettings().setRotateGesturesEnabled(false);
+
+        MyLocationStyle myLocationStyle;
+        myLocationStyle = new MyLocationStyle();//初始化定位蓝点样式类
+        myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATE);//连续定位，且将视角移动到中央
+        myLocationStyle.interval(2000); //设置连续定位模式下的定位间隔，只在连续定位模式下生效，单次定位模式下不会生效。单位为毫秒。
+        myLocationStyle.showMyLocation(true);
+        mAMap.getUiSettings().setMyLocationButtonEnabled(true);//设置默认定位按钮是否显示，非必需设置。
+
+        mAMap.setMyLocationStyle(myLocationStyle);//设置定位蓝点的Style
+        mAMap.setMyLocationEnabled(true);// 设置为true表示启动显示定位蓝点，false表示隐藏定位蓝点并不进行定位，默认是false。
+        mAMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+        relativeLayout.setVisibility(View.GONE);
+
+
     }
 
     /**
@@ -299,14 +348,17 @@ public class NavigationFragment extends Fragment implements
         }
         mPoiMarker.setTitle(tip.getName());
         mPoiMarker.setSnippet(tip.getAddress());
+
     }
+
+
+
 
     /**
      * 点击事件回调方法
      */
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onClick(View v) { switch (v.getId()) {
             case R.id.main_keywords:
                 Intent intent = new Intent(this.getContext(), InputTipsActivity.class);
                 startActivityForResult(intent, REQUEST_CODE);

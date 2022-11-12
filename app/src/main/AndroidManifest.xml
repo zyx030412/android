@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.track">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 用于进行网络定位 -->
@@ -52,6 +53,11 @@
         <activity
             android:name=".SetTrackInfoActivity"
             android:exported="false" />
+        <activity
+            android:name="com.amap.api.navi.AmapRouteActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:configChanges="orientation|keyboardHidden|screenSize|navigation"
+            tools:ignore="DuplicateActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
