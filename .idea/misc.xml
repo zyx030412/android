@@ -13,12 +13,15 @@
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/drawable/line_gradient_bg_shape.xml" value="0.2545" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/drawable/number_choose_button.xml" value="0.2125" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/drawable/number_choose_button_blue.xml" value="0.2125" />
+        <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/drawable/number_choose_button_white.xml" value="0.222" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/drawable/radio_register.xml" value="0.1525" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/drawable/radio_register_selected.xml" value="0.1525" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/drawable/retangle.xml" value="0.264" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/drawable/retangle_register.xml" value="0.1525" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/drawable/retangle_register_button.xml" value="0.1525" />
+        <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/activity_change_car_info.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/activity_current_temperature.xml" value="0.27717391304347827" />
+        <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/activity_demo.xml" value="0.2734375" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/activity_index.xml" value="0.34610630407911" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/activity_input_tips.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/activity_login.xml" value="0.25" />

@@ -15,8 +15,8 @@ import android.view.SurfaceView;
 
 import androidx.annotation.Nullable;
 
+import com.example.track.MainActivity;
 import com.example.track.R;
-import com.example.track.model.TemperatureListViewModel;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -63,7 +63,6 @@ public class CurrentTemperatureView extends SurfaceView {
     /**
      * 对象类
      */
-    private TemperatureListViewModel mTemperatureListViewModel;
     /**
      * 1)context先看第一个构造方法，他只有一个context，这个构造方法使用在代码中直接new出一个控件，它不附带任何自定义属性。
      *
@@ -122,7 +121,6 @@ public class CurrentTemperatureView extends SurfaceView {
         flagPaint.setStrokeWidth(3);
         flagPaint.setAntiAlias(true);
 //        对象
-        mTemperatureListViewModel = new TemperatureListViewModel();
     }
         //3.重写onMesure方法
     @Override
@@ -243,7 +241,9 @@ public class CurrentTemperatureView extends SurfaceView {
      * 提取当前温度
      */
     public void getCurTemperature() throws InterruptedException {
-        curTemperature= mTemperatureListViewModel.getCurTemperature();
+        if (MainActivity.getCurrentTemperature()!=null) {
+            curTemperature= MainActivity.getCurrentTemperature().getTemperature();
+        }
     }
     /**
      *刷新view
@@ -260,7 +260,7 @@ public class CurrentTemperatureView extends SurfaceView {
                 postInvalidate();
             }
         };
-        timer.schedule(timerTask, 0, 6000);
+        timer.schedule(timerTask, 0, 2000);
     }
     public void circular1(Canvas canvas){
         // 底环（灰色）
@@ -299,7 +299,6 @@ public class CurrentTemperatureView extends SurfaceView {
         // 连线
         float[] pts1 = new float[8];
         pts1[0] = centerPoint.x + relativePoint + radius / 24;
-//         pts1[0] = centerPoint.x + relativePoint + radius / 24;
         pts1[1] = centerPoint.y + relativePoint + radius / 24;
 
         pts1[2] = centerPoint.x + relativePoint +40;
@@ -362,20 +361,14 @@ public class CurrentTemperatureView extends SurfaceView {
         float relativePoint = (float) Math.sqrt(temp * temp / 2);
         canvas.drawCircle(centerPoint2.x + relativePoint, centerPoint2.y
                 + relativePoint, radius / 12, flagPaint);
-//
         // 连线
         float[] pts1 = new float[8];
         pts1[0] = centerPoint2.x + radius / 24;
-//         pts1[0] = centerPoint.x + relativePoint + radius / 24;
         pts1[1] = centerPoint2.y + radius + radius / 24;
 
         pts1[2] = pts1[0] ;
         pts1[3] = pts1[1]+ 100;
 
-//        pts1[4] = pts1[2];
-//        pts1[5] = pts1[3];
-//        pts1[6] = pts1[4] ;
-//        pts1[7] = pts1[5]+80;
         canvas.drawLines(pts1, flagPaint);
 
         // 环中心进度文本（动态迭加的）
@@ -390,8 +383,6 @@ public class CurrentTemperatureView extends SurfaceView {
         // 评级提示
         progressTextPaint.setTextSize(25);
         float w = 0;
-//        String text = "";
-//        text="温度正常";
         w = progressTextPaint.measureText(text);
         canvas.drawText(text, centerPoint2.x - w / 2, centerPoint2.y + 40,
                 progressTextPaint);
@@ -424,41 +415,31 @@ public class CurrentTemperatureView extends SurfaceView {
         }
         sweepAngle=360/28.00F*Float.parseFloat(curTemperature);
         canvas.drawArc(oval1, -90, sweepAngle, false, genPaint);
-//画个指示圆
+    //画个指示圆
         float temp = sroundRadius;
         float relativePoint = (float) Math.sqrt(temp * temp / 2);
         canvas.drawCircle(centerPoint3.x + relativePoint, centerPoint3.y
                 + relativePoint, radius / 12, flagPaint);
-//
         // 连线
         float[] pts1 = new float[8];
         pts1[0] = centerPoint3.x + radius / 24;
-//         pts1[0] = centerPoint.x + relativePoint + radius / 24;
         pts1[1] = centerPoint3.y + radius + radius / 24;
 
         pts1[2] = pts1[0] ;
         pts1[3] = pts1[1]+ 100;
 
-//        pts1[4] = pts1[2];
-//        pts1[5] = pts1[3];
-//        pts1[6] = pts1[4] ;
-//        pts1[7] = pts1[5]+80;
         canvas.drawLines(pts1, flagPaint);
 
         // 环中心进度文本（动态迭加的）
         String curPercent = curTemperature;
         progressTextPaint.setTextSize(45);
-//        Paint的measureText()方法取得字符串显示的宽度值
         float ww = progressTextPaint.measureText(curPercent + "℃");
-//        根据ww计算位置
         canvas.drawText(curPercent + "℃", centerPoint3.x - ww / 2,
                 centerPoint3.y, progressTextPaint);
 
         // 评级提示
         progressTextPaint.setTextSize(25);
         float w = 0;
-//        String text = "";
-//        text="温度正常";
         w = progressTextPaint.measureText(text);
         canvas.drawText(text, centerPoint3.x - w / 2, centerPoint3.y + 40,
                 progressTextPaint);

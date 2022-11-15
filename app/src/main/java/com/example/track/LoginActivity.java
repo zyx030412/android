@@ -50,6 +50,10 @@ public class LoginActivity extends AppCompatActivity {
                 intent.putExtra("user", (Serializable) user);
                 finish();
                 startActivity(intent);
+            }else if  (msg.what == 3){
+                //请求失败
+            }else if (msg.what == 4){
+
             }
         }
     };

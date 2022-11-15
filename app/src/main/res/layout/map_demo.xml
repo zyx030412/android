@@ -16,7 +16,7 @@
         android:layout_height="48dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="@color/white">
 
         <ImageView
@@ -45,10 +45,10 @@
             android:inputType="text|textAutoComplete"
             android:maxLength="20"
             android:paddingLeft="10dp"
-            android:textColorLink="@color/black"
             android:singleLine="true"
             android:textColor="#000000"
             android:textColorHint="@color/text_hint"
+            android:textColorLink="@color/black"
             android:textSize="16.0sp" />
 
 
@@ -56,7 +56,7 @@
 
     <RelativeLayout
         android:id="@+id/map_navi_bottom"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/white"

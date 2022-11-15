@@ -45,11 +45,7 @@ public class TemperatureListFragment extends Fragment {//import androidx.fragmen
         mTemperatureRecyclerView = v.findViewById(R.id.crime_recycler_view);
 //        获取safetyList对象
         mTemperatureRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        try {
-            safetyList =  mTemperatureListViewModel.getSafetyList(null);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        safetyList =  mTemperatureListViewModel.getSafetyList(null);
         mTemperatureRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
                 updateUI();
         return v;

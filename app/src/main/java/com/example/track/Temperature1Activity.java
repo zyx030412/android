@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -12,9 +15,12 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.example.track.entity.Temperature;
-import com.example.track.model.TemperatureListViewModel;
+import com.example.track.entity.User;
 import com.example.track.model.datepicker.CustomDatePicker;
 import com.example.track.model.datepicker.DateFormatUtils;
 import com.github.mikephil.charting.animation.Easing;
@@ -30,6 +36,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +55,35 @@ public class Temperature1Activity extends Activity implements View.OnClickListen
     private String search_time;//时间选择器选择的时间
     //    private String weeks[];//X轴()
 //    private float datas[];//Y轴
+    private Handler handler = new Handler(Looper.myLooper()){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+
+            if (msg.what == 0){
+                Toast.makeText(Temperature1Activity.this,"网络请求失败",Toast.LENGTH_SHORT).show();
+            }else if(msg.what == 1){
+                mSafetyList = (List<Temperature>) msg.obj;
+                if (mSafetyList.toString()=="[]"){
+                    return;
+                }
+                SetYAxis();//
+                SetXAxis();
+                SetData();
+                setChartProperties();
+                SetDesc();//折线图的标题
+                SetLegend();
+                SetHeightLimit(28f, "高温预警-28℃", Color.rgb(255, 0, 0));
+                chart.invalidate();//图形刷新
+            }
+        }
+
+
+
+
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -363,21 +399,8 @@ public class Temperature1Activity extends Activity implements View.OnClickListen
      * 获取选择时间的ListSafety数据
      */
     private void ListSafety() throws InterruptedException {
-        TemperatureListViewModel temperatureListViewModel=new TemperatureListViewModel();
-        Log.d("time555","search_time:"+search_time);
-        mSafetyList=temperatureListViewModel.getSafetyList(search_time);
-        Log.d("time","List:"+mSafetyList);
-        if (mSafetyList.toString()=="[]"){
-            return;
-        }
-        SetYAxis();//
-        SetXAxis();
-        SetData();
-        setChartProperties();
-        SetDesc();//折线图的标题
-        SetLegend();
-        SetHeightLimit(28f, "高温预警-28℃", Color.rgb(255, 0, 0));
-        chart.invalidate();//图形刷新
+
+
     }
 
 }

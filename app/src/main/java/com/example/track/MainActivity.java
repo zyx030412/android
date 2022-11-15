@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.track.entity.Temperature;
+import com.example.track.entity.Trip;
 import com.example.track.entity.User;
 import com.example.track.fragment.MineBodyFragment;
 import com.example.track.fragment.NavigationFragment;
@@ -24,12 +25,20 @@ import com.example.track.service.MainActivityUpdateService;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 
 public class MainActivity extends AppCompatActivity {
     private ImageButton mine,navigation,qrcode;
     private TextView mineText,homepageText,qrcodeText;
-    private static User user = new User(2,"18345264895","123321");
+    private static User user = new User("18345264895","123321");
+
+    public static Temperature currentTemperature;
+    public static Trip currentTrip;
+
+
     private Handler handler1 = new Handler(Looper.myLooper()){
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -39,14 +48,18 @@ public class MainActivity extends AppCompatActivity {
             } else if (msg.what == 2) {
                 Toast.makeText(MainActivity.this, "没有数据", Toast.LENGTH_SHORT).show();
             } else if (msg.what == 1) {
-                Temperature safety = (Temperature) msg.obj;
-                int ifOverHeated = safety.getWarning_flag();
+                Temperature temperature = (Temperature) msg.obj;
+                System.out.println(temperature.toString());
+                currentTemperature = temperature;
+                int ifOverHeated = temperature.getWarning_flag();
                 if (ifOverHeated == 0) {
                     Toast.makeText(MainActivity.this,"刹车片过热",Toast.LENGTH_SHORT).show();
                 }
             }
         }
     };
+
+    Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,21 +144,28 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
+
+        ThreadPoolExecutor pool = new ThreadPoolExecutor(3,9,1,
+                TimeUnit.SECONDS,new LinkedBlockingDeque<Runnable>(128));
+
         Timer time = new Timer();
         time.schedule(new TimerTask() {
             @Override
             public void run() {
-                new MainActivityUpdateService(handler1);
+                Runnable temperatureRunnable = new MainActivityUpdateService().getCurrentTemperature(handler1);
+                pool.execute(temperatureRunnable);
             }
         },1000,1000);
-
-//        new MainActivityUpdateService(handler1);
 
     }
     public static String getUser(){
         return user.getUsername();
     }
 
+    public static Temperature getCurrentTemperature(){
+        return currentTemperature;
+    }
 
 
 

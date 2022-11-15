@@ -50,10 +50,10 @@ public class QrcodeBodyItem4Fragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        SoundInit();
-        if(Double.parseDouble(mCurrentTemperature.getCurTemp())>=28){
-            mMediaPlayer.start();
-        }
+//        SoundInit();
+//        if(Double.parseDouble(mCurrentTemperature.getCurTemp())>=28){
+//            mMediaPlayer.start();
+//        }
     }
 
     public void SoundInit(){

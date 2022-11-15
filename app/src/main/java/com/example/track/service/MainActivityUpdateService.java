@@ -15,10 +15,21 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class MainActivityUpdateService {
+    private Handler mHandler;
 
-    public MainActivityUpdateService(Handler handler){
+    public MainActivityUpdateService(){
 
-        new Thread(new Runnable() {
+    }
+
+    /**
+     * 此方法用于获得实时温度数据
+     * 0:网络请求失败
+     * 2:请求失败
+     * 1:请求成功，并返回数据到message中
+     * @param handler
+     */
+    public Runnable getCurrentTemperature(Handler handler){
+        Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 OkHttpClient client = new OkHttpClient();
@@ -39,22 +50,25 @@ public class MainActivityUpdateService {
                     }
 
                     @Override
-                    public void onResponse(Call call, Response response) throws IOException{
+                    public void onResponse(Call call, Response response) throws IOException {
                         String body = response.body().string();
-                        if (body == null || body.equals("")){
-                            Message fail = new Message();
-                            fail.what = 2;
-                            handler.sendMessage(fail);
-                        }else{
-                            Temperature safety = JSON.parseObject(body, Temperature.class);
+                        if (body == null || body.equals("")) {
+                            //请求失败
+                        } else {
+                            Temperature temperature = JSON.parseObject(body, Temperature.class);
                             Message success = new Message();
                             success.what = 1;
-                            success.obj = safety;
+                            success.obj = temperature;
                             handler.sendMessage(success);
                         }
                     }
                 });
             }
-        }).start();
+        };
+        return runnable;
+    }
+
+    public void getCurrent (){
+
     }
 }

@@ -54,9 +54,12 @@
             android:name=".SetTrackInfoActivity"
             android:exported="false" />
         <activity
+            android:name=".DemoActivity"
+            android:exported="false" />
+        <activity
             android:name="com.amap.api.navi.AmapRouteActivity"
-            android:theme="@android:style/Theme.NoTitleBar"
             android:configChanges="orientation|keyboardHidden|screenSize|navigation"
+            android:theme="@android:style/Theme.NoTitleBar"
             tools:ignore="DuplicateActivity" />
         <activity
             android:name=".MainActivity"
