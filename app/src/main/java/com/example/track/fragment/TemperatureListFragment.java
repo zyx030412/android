@@ -37,7 +37,7 @@ public class TemperatureListFragment extends Fragment {//import androidx.fragmen
         mTemperatureListViewModel =new ViewModelProvider(this).get(TemperatureListViewModel.class);
     }
 
-//
+//。
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
