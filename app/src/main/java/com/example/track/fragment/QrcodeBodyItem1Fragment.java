@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +13,15 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.track.MainActivity;
 import com.example.track.R;
 import com.example.track.entity.Item3;
 
@@ -29,6 +33,8 @@ public class QrcodeBodyItem1Fragment extends Fragment {
     private List<Item3> item1List = new ArrayList<>();
     private Button call,sos,fix,brake;
     private ImageButton call_img,sos_img,fix_img,brake_img;
+    private ActivityResultLauncher mCallPermissionResultLauncher;//拨打电话处理
+    private ActivityResultLauncher mSendPermissionResultLauncher;//发送短信处理
 
 
     @Nullable
@@ -86,9 +92,17 @@ public class QrcodeBodyItem1Fragment extends Fragment {
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Toast.makeText(getContext(), "确定", Toast.LENGTH_SHORT).show();
-                                Intent dialIntent =  new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + familynumber));
-                                startActivity(dialIntent);
+
+                                Uri uri=Uri.parse("tel:10086");//求救号码
+                                startActivity(new Intent(Intent.ACTION_CALL,uri));
+
+
+                                SmsManager smsManager=SmsManager.getDefault();
+                                //短信号码
+                                smsManager.sendTextMessage("10086", null, "MainActivity.getPosition()", null, null);
+                                Toast.makeText(getContext(), "求救短信已经发出", Toast.LENGTH_SHORT).show();
+
+
                             }
                         })
 
@@ -119,9 +133,14 @@ public class QrcodeBodyItem1Fragment extends Fragment {
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Toast.makeText(getContext(), "确定", Toast.LENGTH_SHORT).show();
-                                Intent dialIntent =  new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + sos));
-                                startActivity(dialIntent);
+                                Uri uri=Uri.parse("tel:10086");//求救号码
+                                startActivity(new Intent(Intent.ACTION_CALL,uri));
+
+
+                                SmsManager smsManager=SmsManager.getDefault();
+                                //短信号码
+                                smsManager.sendTextMessage("10086", null, "MainActivity.getPosition()", null, null);
+                                Toast.makeText(getContext(), "求救短信已经发出", Toast.LENGTH_SHORT).show();
                             }
                         })
 

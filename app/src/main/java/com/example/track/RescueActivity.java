@@ -152,7 +152,6 @@ public class RescueActivity extends AppCompatActivity {
         }
 
         //获取地图控件引用
-        mMapView = findViewById(R.id.map);
         mMapLocationListener = aMapLocation -> {
             if(aMapLocation!=null)
             {
@@ -168,7 +167,7 @@ public class RescueActivity extends AppCompatActivity {
                             +"纬度: "+latitude+"\n"
                             +"详细位置: "+province+city+district+streetNumber;
                     //Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
-                    mEmergencyText="我在以下位置遭遇严重车祸急需救援"+text+"\n救救我";
+                    mEmergencyText="我在以下位置遭遇严重车祸急需救援" + text + "\n救救我";
                     //这里 try catch fragment还是放到onViewCreated比较合适，减少崩溃几率
                     try {
                         Emergency(isNeed);
@@ -199,16 +198,6 @@ public class RescueActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        myLocationStyle = new MyLocationStyle();//初始化定位蓝点样式类myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE);//连续定位、且将视角移动到地图中心点，定位点依照设备方向旋转，并且会跟随设备移动。（1秒1次定位）如果不设置myLocationType，默认也会执行此种模式。
-        myLocationStyle.interval(2000); //设置连续定位模式下的定位间隔，只在连续定位模式下生效，单次定位模式下不会生效。单位为毫秒。
-        myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATE);
-        myLocationStyle.showMyLocation(true);
-        aMap.setMyLocationStyle(myLocationStyle);//设置定位蓝点的Style
-        aMap.getUiSettings().setMyLocationButtonEnabled(true);
-        aMap.setMyLocationEnabled(true);
-        aMapLocationClient.startLocation();
-        aMap.moveCamera(CameraUpdateFactory.zoomTo(15));
-        aMapLocationClient.setLocationListener(mMapLocationListener);
 
         mCallPermissionResultLauncher=registerForActivityResult(new ActivityResultContracts.RequestPermission(),result -> {
             if (result){
