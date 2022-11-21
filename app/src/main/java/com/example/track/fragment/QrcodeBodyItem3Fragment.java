@@ -12,50 +12,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.track.R;
-import com.example.track.adapter.Item3RecycleViewAdapter;
-import com.example.track.entity.Item3;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.track.adapter.Item3Adapter;
 
 public class QrcodeBodyItem3Fragment extends Fragment {
-    private RecyclerView recyclerView;
-    private List<Item3> item1List = new ArrayList<>();
+    private RecyclerView mRecyclerView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_body_qrcode_item3, container, false);
-        recyclerView = v.findViewById(R.id.qrcode_item1_recycleview);
-        if (item1List.size()==0) {
-            initItems();
-        }
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        View v = inflater.inflate(R.layout.recycleview_body_qrcode_item3, container, false);
+        mRecyclerView = v.findViewById(R.id.recycleview_body_qrcode_item3);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
-        Item3RecycleViewAdapter adapter = new Item3RecycleViewAdapter(item1List);
-        recyclerView.setAdapter(adapter);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+        Item3Adapter adapter = new Item3Adapter();
+        mRecyclerView.setAdapter(adapter);
 
-//        recyclerView.setOnTouchListener(new View.OnTouchListener(){
-//
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event){
-//                return true;
-//            }
-//        });
+
         return v;
     }
-
-    private void initItems(){
-        Item3 item1 = new Item3(R.mipmap.brake,"刹车系统");
-        item1List.add(item1);
-        Item3 item2 = new Item3(R.mipmap.water,"水位系统");
-        item1List.add(item2);
-        Item3 item3 = new Item3(R.mipmap.speed,"速度系统");
-        item1List.add(item3);
-        Item3 item4 = new Item3(R.mipmap.camera,"检测系统");
-        item1List.add(item4);
-    }
-
-
 }

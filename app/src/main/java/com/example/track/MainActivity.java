@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,6 +36,7 @@ import com.example.track.entity.User;
 import com.example.track.fragment.MineBodyFragment;
 import com.example.track.fragment.NavigationFragment;
 import com.example.track.fragment.QrcodeBodyFragment;
+import com.example.track.model.View.CirStatisticGraph;
 import com.example.track.service.MainActivityUpdateService;
 
 import java.util.Timer;
@@ -47,9 +49,6 @@ import java.util.concurrent.TimeUnit;
 public class MainActivity extends AppCompatActivity {
     private ImageButton mine,navigation,qrcode;
     private TextView mineText,homepageText,qrcodeText;
-    private static User user = new User("18345264895","123321");
-    public static Temperature currentTemperature;
-    public static Trip currentTrip;
     private AMapLocationClient aMapLocationClient;
     private AMapLocationListener mMapLocationListener;
     private String mEmergencyText = "";
@@ -58,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
     private Timer mOffTime;
     public static boolean isNeed;//是否需要救援
     public static int isRescue = 0;
+    private static User user = new User("18345264895","123321");
+    public static Temperature currentTemperature;
+    public static Trip currentTrip;
 
 
     private Handler handler1 = new Handler(Looper.myLooper()){
@@ -76,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 if (ifOverHeated == 0) {
                     Toast.makeText(MainActivity.this,"刹车片过热",Toast.LENGTH_SHORT).show();
                 }
-                if (Integer.parseInt(temperature.getTemperature()) > 100){
+                if (Float.parseFloat(temperature.getTemperature()) > 100){
                     initDialog();
                     isRescue = 1;
                 }
@@ -192,10 +194,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("ResourceAsColor")
     void initDialog(){
         if (isRescue == 0){
             mOffTextView = new TextView(this);
             mOffTextView.setTextSize(26);
+            mOffTextView.setTextColor(R.color.white);
 
             mDialog = new AlertDialog.Builder(this)
                     .setTitle("执行警告")
