@@ -67,9 +67,9 @@ public class MainActivity extends AppCompatActivity {
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             if (msg.what == 0) {
-                Toast.makeText(MainActivity.this, "网络请求失败", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, "网络请求失败", Toast.LENGTH_SHORT).show();
             } else if (msg.what == 2) {
-                Toast.makeText(MainActivity.this, "没有数据", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, "没有数据", Toast.LENGTH_SHORT).show();
             } else if (msg.what == 1) {
                 Temperature temperature = (Temperature) msg.obj;
                 System.out.println(temperature.toString());

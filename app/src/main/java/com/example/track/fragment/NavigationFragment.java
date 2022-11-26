@@ -1,5 +1,6 @@
 package com.example.track.fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -16,6 +17,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.SupportMapFragment;
@@ -26,11 +31,14 @@ import com.amap.api.maps.AMap.OnMarkerClickListener;
 import com.amap.api.maps.AMap.InfoWindowAdapter;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.maps.model.Poi;
+import com.amap.api.navi.AMapNaviListener;
 import com.amap.api.navi.AmapNaviPage;
 import com.amap.api.navi.AmapNaviParams;
 import com.amap.api.navi.AmapNaviType;
 import com.amap.api.navi.AmapPageType;
 import com.amap.api.navi.model.AMapCarInfo;
+import com.amap.api.navi.model.AMapNaviLocation;
+import com.amap.api.navi.model.NaviPoi;
 import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.help.Tip;
@@ -45,19 +53,32 @@ import com.amap.api.services.core.PoiItem;
 import com.amap.api.services.core.SuggestionCity;
 import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
+import com.amap.api.services.poisearch.PoiSearchV2;
+import com.amap.api.services.route.Navi;
 import com.example.track.InputTipsActivity;
 import com.example.track.MainActivity;
 import com.example.track.NavigationActivity;
 import com.example.track.R;
+import com.example.track.entity.Trip;
 import com.example.track.model.PoiOverPlayModel;
 import com.example.track.entity.Constants;
 import com.example.track.entity.ToastUtil;
+import com.example.track.service.StoreTripService;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.zip.Inflater;
 
 public class NavigationFragment extends Fragment implements
         AMap.OnMarkerClickListener, AMap.InfoWindowAdapter,
         OnPoiSearchListener, View.OnClickListener {
+    //声明AMapLocationClient类对象
+    public AMapLocationClient mLocationClient = null;
+    //声明定位回调监听器
+    public AMapLocationListener mLocationListener = null;
+    //声明AMapLocationClientOption对象
+    public AMapLocationClientOption mLocationOption = null;
 
     private AMap mAMap;
     private String mKeyWords = "";// 要输入的poi搜索关键字
@@ -85,11 +106,26 @@ public class NavigationFragment extends Fragment implements
             String title = marker.getTitle();
             String poiId = marker.getId();
             Poi end = new Poi(title,thisLatLng,poiId);
+
             navigationButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     AmapNaviParams params = new AmapNaviParams(null, null, end, AmapNaviType.DRIVER, AmapPageType.ROUTE);
-                    params.setCarInfo(new AMapCarInfo());
+
+                    AMapCarInfo carInfo = new AMapCarInfo();
+                    carInfo.setCarNumber("浙A12345");
+                    carInfo.setCarType("1");             //设置车辆类型,0:小车; 1:货车. 默认0(小车).
+                    carInfo.setVehicleAxis("6");         //设置货车的轴数，mCarType = 1时候生效，取值[0-255]，默认为2
+                    carInfo.setVehicleHeight("3.56");    //设置货车的高度，单位：米，mCarType = 1时候生效，取值[0-25.5],默认1.6米
+                    carInfo.setVehicleLength("7.3");     //设置货车的最大长度，单位：米，mCarType = 1时候生效，取值[0-25]，默认6米
+                    carInfo.setVehicleWidth("2.5");      //设置货车的最大宽度，单位：米，mCarType = 1时候生效，取值[0-25.5]，默认2.5米
+                    carInfo.setVehicleSize("2");         //设置货车的大小，1-微型货车 2-轻型/小型货车 3-中型货车 4-重型货车，默认为2
+                    carInfo.setVehicleLoad("25.99");     //设置货车的总重，即车重+核定载重，单位：吨，mCarType = 1时候生效，取值[0-6553.5]
+                    carInfo.setVehicleWeight("20");      //设置货车的核定载重，单位：吨，mCarType = 1时候生效，取值[0-6553.5]
+                    carInfo.setRestriction(true);        //设置是否躲避车辆限行，true代表躲避车辆限行，false代表不躲避车辆限行,默认为true
+                    carInfo.setVehicleLoadSwitch(true);   //设置货车重量是否参与算路，true-重量会参与算路；false-重量不会参与算路。默认为false
+
+                    params.setCarInfo(carInfo);
                     /**
                      * 设置播报模式
                      * @param context
@@ -97,8 +133,61 @@ public class NavigationFragment extends Fragment implements
                      * @since 7.1.0
                      */
                     params.setRouteStrategy(2);
+                    NaviPoi thisStart = params.getStart();
+                    NaviPoi thisEnd = params.getEnd();
+                    String address = null;
                     // 启动组件
                     AmapNaviPage.getInstance().showRouteActivity(getContext(), params, null);
+
+                    try {
+                        mLocationClient = new AMapLocationClient(getContext());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+
+                    //初始化AMapLocationClientOption对象
+                    mLocationOption = new AMapLocationClientOption();
+                    mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+                    mLocationOption.setOnceLocation(true);
+                    mLocationOption.setOnceLocationLatest(true);
+                    mLocationOption.setNeedAddress(true);
+
+
+                    mLocationListener = new AMapLocationListener() {
+                        @Override
+                        public void onLocationChanged(AMapLocation amapLocation) {
+                            if (amapLocation != null) {
+                                if (amapLocation.getErrorCode() == 0) {
+                                    //可在其中解析amapLocation获取相应内容。
+                                    String startLa = String.valueOf(amapLocation.getLatitude());
+                                    String startLo = String.valueOf(amapLocation.getLongitude());
+                                    String startAddress = amapLocation.getAddress();
+                                    String endLa = String.valueOf(thisEnd.getCoordinate().latitude);
+                                    String endLo = String.valueOf(thisEnd.getCoordinate().latitude);
+                                    String endAddress = thisEnd.getName();
+                                    Date date = new Date();
+                                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                    String startTime = simpleDateFormat.format(date);
+                                    Trip trip = new Trip(1145.14,"20",15,startTime,startTime,startAddress,endAddress,startLo,endLo,startLa,endLa,MainActivity.getUser());
+                                    new StoreTripService().storeTrip(trip);
+                                    System.out.println(trip.toString());
+                                }else {
+                                    //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
+                                    Log.e("AmapError","location Error, ErrCode:"
+                                            + amapLocation.getErrorCode() + ", errInfo:"
+                                            + amapLocation.getErrorInfo());
+                                }
+                            }
+                        }
+                    };
+
+
+                    mLocationClient.setLocationOption(mLocationOption);
+                    mLocationClient.setLocationListener(mLocationListener);
+                    mLocationClient.startLocation();
+
+
                     //设置退出导航组件时摧毁导航实例
                     params.setNeedCalculateRouteWhenPresent(true);
                     relativeLayout.setVisibility(View.GONE);
@@ -167,7 +256,7 @@ public class NavigationFragment extends Fragment implements
         mAMap.setMyLocationEnabled(true);// 设置为true表示启动显示定位蓝点，false表示隐藏定位蓝点并不进行定位，默认是false。
         mAMap.moveCamera(CameraUpdateFactory.zoomTo(15));
         relativeLayout.setVisibility(View.GONE);
-
+//        mAMap.getMyLocation().get
 
     }
 
@@ -206,7 +295,7 @@ public class NavigationFragment extends Fragment implements
         // 设置查第一页
         query.setPageNum(currentPage);
 
-        poiSearch = new PoiSearch(this.getContext(), query);
+        poiSearch = new PoiSearch(this.getContext(),query);
         poiSearch.setOnPoiSearchListener(this);
         poiSearch.searchPOIAsyn();
     }

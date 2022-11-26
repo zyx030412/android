@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.alibaba.fastjson.JSON;
+import com.example.track.MainActivity;
 import com.example.track.entity.Temperature;
 
 import java.io.IOException;
@@ -36,7 +37,7 @@ public class MainActivityUpdateService {
 
                 //创建http请求
 
-                Request request = new Request.Builder().url("http://120.25.145.148:8078/track_safety_system_current")
+                Request request = new Request.Builder().url("http://120.25.145.148:6000/temperature/temperature_by_user?phone="+ MainActivity.getUser())
                         .get().build();
 
                 Call call = client.newCall(request);
