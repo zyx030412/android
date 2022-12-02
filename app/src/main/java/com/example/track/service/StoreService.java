@@ -5,6 +5,7 @@ import android.os.Message;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
+import com.example.track.entity.CarInfo;
 import com.example.track.entity.Trip;
 import com.example.track.entity.User;
 
@@ -18,7 +19,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class StoreTripService {
+public class StoreService {
 
     public final OkHttpClient client = new OkHttpClient();
 
@@ -55,5 +56,9 @@ public class StoreTripService {
 
 
         }).start();
+    }
+
+    public void storeCarInfo(CarInfo carInfo) {
+
     }
 }

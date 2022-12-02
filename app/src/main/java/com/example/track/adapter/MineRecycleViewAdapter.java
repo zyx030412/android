@@ -12,8 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.track.R;
-import com.example.track.SetTrackInfoActivity;
-import com.example.track.Temperature1Activity;
+import com.example.track.ChangeTrackInfoActivity;
 import com.example.track.entity.Mine;
 
 import java.util.List;
@@ -63,7 +62,7 @@ public class MineRecycleViewAdapter extends RecyclerView.Adapter<MineRecycleView
             public void onClick(View v) {
                 switch (position){
                     case 0:
-                        Intent intent = new Intent(holder.itemView.getContext(), SetTrackInfoActivity.class);
+                        Intent intent = new Intent(holder.itemView.getContext(), ChangeTrackInfoActivity.class);
                         holder.itemView.getContext().startActivity(intent);
                         break;
                     case 1:
@@ -76,7 +75,7 @@ public class MineRecycleViewAdapter extends RecyclerView.Adapter<MineRecycleView
             public void onClick(View v) {
                 switch (position){
                     case 0:
-                        Intent intent = new Intent(holder.itemView.getContext(), SetTrackInfoActivity.class);
+                        Intent intent = new Intent(holder.itemView.getContext(), ChangeTrackInfoActivity.class);
                         holder.itemView.getContext().startActivity(intent);
                         break;
                     case 1:
@@ -89,7 +88,7 @@ public class MineRecycleViewAdapter extends RecyclerView.Adapter<MineRecycleView
             public void onClick(View v) {
                 switch (position){
                     case 0:
-                        Intent intent = new Intent(holder.itemView.getContext(), SetTrackInfoActivity.class);
+                        Intent intent = new Intent(holder.itemView.getContext(), ChangeTrackInfoActivity.class);
                         holder.itemView.getContext().startActivity(intent);
                         break;
                     case 1:
@@ -102,7 +101,7 @@ public class MineRecycleViewAdapter extends RecyclerView.Adapter<MineRecycleView
             public void onClick(View v) {
                 switch (position){
                     case 0:
-                        Intent intent = new Intent(holder.itemView.getContext(), SetTrackInfoActivity.class);
+                        Intent intent = new Intent(holder.itemView.getContext(), ChangeTrackInfoActivity.class);
                         holder.itemView.getContext().startActivity(intent);
                         break;
                     case 1:

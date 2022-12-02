@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mineText,homepageText,qrcodeText;
     private AMapLocationClient aMapLocationClient;
     private AMapLocationListener mMapLocationListener;
-    private String mEmergencyText = "";
+//    private String mEmergencyText = "";
     private TextView mOffTextView;
     private Dialog mDialog;
     private Timer mOffTime;
@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private Handler handler1 = new Handler(Looper.myLooper()){
+//        int flag_1 = 0;
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (msg.what == 2) {
 //                Toast.makeText(MainActivity.this, "没有数据", Toast.LENGTH_SHORT).show();
             } else if (msg.what == 1) {
+
                 Temperature temperature = (Temperature) msg.obj;
                 System.out.println(temperature.toString());
                 currentTemperature = temperature;

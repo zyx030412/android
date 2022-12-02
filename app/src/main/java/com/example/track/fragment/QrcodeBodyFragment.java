@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,9 +20,13 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.track.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class QrcodeBodyFragment extends Fragment {
 
     private Button button1,button2,button3,button4;
+    private TextView time;
 
 
     @Override
@@ -45,6 +50,11 @@ public class QrcodeBodyFragment extends Fragment {
         button2 = v.findViewById(R.id.qrcode_item2);
         button3 = v.findViewById(R.id.qrcode_item3);
         button4 = v.findViewById(R.id.qrcode_item4);
+        time = v.findViewById(R.id.fragment_body_qrcode_time);
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd HH:mm");
+        String update = sdf.format(date);
+        time.setText(update);
 
         button1.setTextColor(Color.parseColor("#000000"));
         FragmentManager fm = getChildFragmentManager();

@@ -1,6 +1,5 @@
 package com.example.track;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,7 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.track.service.RegisterService;
+import com.example.track.service.LoginService;
 
 public class RegisterActivity extends AppCompatActivity {
     private Button cancel,getCode,radioButton,userAgreement,register;
@@ -57,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String Phone = String.valueOf(phone.getText());
                 String Code = String.valueOf(code.getText());
                 if (isSelected == 1){
-                    RegisterService registerService = new RegisterService();
+                    LoginService registerService = new LoginService();
 //                    registerService.register();
                 }else{
                     Toast.makeText(RegisterActivity.this,"请先同意用户条款",Toast.LENGTH_SHORT).show();

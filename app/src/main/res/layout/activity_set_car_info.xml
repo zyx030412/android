@@ -281,7 +281,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="总重量"
+                                android:text="总重量    "
                                 android:textColor="@color/black"
                                 android:textSize="15dp"
                                 android:layout_marginLeft="5dp"/>
@@ -364,7 +364,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="车长"
+                                android:text="车长        "
                                 android:textColor="@color/black"
                                 android:textSize="15dp"
                                 android:layout_marginLeft="5dp"/>
@@ -407,7 +407,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="车宽"
+                                android:text="车宽        "
                                 android:textColor="@color/black"
                                 android:textSize="15dp"
                                 android:layout_marginLeft="5dp"/>
@@ -450,7 +450,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="车高"
+                                android:text="车高        "
                                 android:textColor="@color/black"
                                 android:textSize="15dp"
                                 android:layout_marginLeft="5dp"/>

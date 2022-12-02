@@ -33,13 +33,30 @@
                     android:textColor="@color/black"
                     android:textSize="28dp" />
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="数据更新于:10/28 18:00"
-                    android:textColor="@color/grey"
-                    android:textSize="15dp" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="数据更新于:"
+                        android:textColor="@color/grey"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="10/28 18:00"
+                        android:textColor="@color/grey"
+                        android:textSize="15dp"
+                        android:id="@+id/fragment_body_qrcode_time"/>
+                </LinearLayout>
+
+
 
             </LinearLayout>
 

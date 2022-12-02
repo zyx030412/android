@@ -60,7 +60,7 @@
             android:name=".InputTipsActivity"
             android:exported="false" />
         <activity
-            android:name=".SetTrackInfoActivity"
+            android:name=".ChangeTrackInfoActivity"
             android:exported="false" />
         <activity
             android:name=".DemoActivity"

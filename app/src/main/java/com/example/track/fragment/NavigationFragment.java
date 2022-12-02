@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,16 +27,13 @@ import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.AMap.OnMarkerClickListener;
-import com.amap.api.maps.AMap.InfoWindowAdapter;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.maps.model.Poi;
-import com.amap.api.navi.AMapNaviListener;
 import com.amap.api.navi.AmapNaviPage;
 import com.amap.api.navi.AmapNaviParams;
 import com.amap.api.navi.AmapNaviType;
 import com.amap.api.navi.AmapPageType;
 import com.amap.api.navi.model.AMapCarInfo;
-import com.amap.api.navi.model.AMapNaviLocation;
 import com.amap.api.navi.model.NaviPoi;
 import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
@@ -46,29 +42,22 @@ import com.amap.api.services.poisearch.PoiSearch.OnPoiSearchListener;
 
 import android.view.View.OnClickListener;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-
 import com.amap.api.services.core.PoiItem;
 import com.amap.api.services.core.SuggestionCity;
 import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
-import com.amap.api.services.poisearch.PoiSearchV2;
-import com.amap.api.services.route.Navi;
 import com.example.track.InputTipsActivity;
 import com.example.track.MainActivity;
-import com.example.track.NavigationActivity;
 import com.example.track.R;
 import com.example.track.entity.Trip;
 import com.example.track.model.PoiOverPlayModel;
 import com.example.track.entity.Constants;
 import com.example.track.entity.ToastUtil;
-import com.example.track.service.StoreTripService;
+import com.example.track.service.StoreService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.zip.Inflater;
 
 public class NavigationFragment extends Fragment implements
         AMap.OnMarkerClickListener, AMap.InfoWindowAdapter,
@@ -170,7 +159,7 @@ public class NavigationFragment extends Fragment implements
                                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                     String startTime = simpleDateFormat.format(date);
                                     Trip trip = new Trip(1145.14,"20",15,startTime,startTime,startAddress,endAddress,startLo,endLo,startLa,endLa,MainActivity.getUser());
-                                    new StoreTripService().storeTrip(trip);
+                                    new StoreService().storeTrip(trip);
                                     System.out.println(trip.toString());
                                 }else {
                                     //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
