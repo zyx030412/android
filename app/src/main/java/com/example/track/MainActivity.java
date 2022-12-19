@@ -10,7 +10,9 @@ import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -21,13 +23,18 @@ import android.os.Looper;
 import android.os.Message;
 import android.telephony.SmsManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.MapsInitializer;
 import com.example.track.entity.Temperature;
@@ -38,12 +45,16 @@ import com.example.track.fragment.NavigationFragment;
 import com.example.track.fragment.QrcodeBodyFragment;
 import com.example.track.model.View.CirStatisticGraph;
 import com.example.track.service.MainActivityUpdateService;
+import com.example.track.service.StoreService;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.zip.Inflater;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -51,7 +62,12 @@ public class MainActivity extends AppCompatActivity {
     private TextView mineText,homepageText,qrcodeText;
     private AMapLocationClient aMapLocationClient;
     private AMapLocationListener mMapLocationListener;
-//    private String mEmergencyText = "";
+//    private String mEmergencyText = "";    //声明AMapLocationClient类对象
+    public AMapLocationClient mLocationClient = null;
+    //声明定位回调监听器
+    public AMapLocationListener mLocationListener = null;
+    //声明AMapLocationClientOption对象
+    public AMapLocationClientOption mLocationOption = null;
     private TextView mOffTextView;
     private Dialog mDialog;
     private Timer mOffTime;
@@ -60,6 +76,9 @@ public class MainActivity extends AppCompatActivity {
     private static User user = new User("18345264895","123321");
     public static Temperature currentTemperature;
     public static Trip currentTrip;
+    public static Activity instance;
+    private static ThreadPoolExecutor pool;
+    private static Timer time;
 
 
     private Handler handler1 = new Handler(Looper.myLooper()){
@@ -94,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
-
+        instance = this;
         //绑定实例
         mine = findViewById(R.id.mine);
         navigation = findViewById(R.id.navigation);
@@ -177,9 +196,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ThreadPoolExecutor pool = new ThreadPoolExecutor(3,9,1, TimeUnit.SECONDS,new LinkedBlockingDeque<Runnable>(128));
+        pool = new ThreadPoolExecutor(3,9,1, TimeUnit.SECONDS,new LinkedBlockingDeque<Runnable>(128));
 
-        Timer time = new Timer();
+        time = new Timer();
         time.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -187,6 +206,7 @@ public class MainActivity extends AppCompatActivity {
                 pool.execute(temperatureRunnable);
             }
         },0,2000);
+
 
 
 /**
@@ -199,26 +219,31 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("ResourceAsColor")
     void initDialog(){
         if (isRescue == 0){
-            mOffTextView = new TextView(this);
-            mOffTextView.setTextSize(26);
-            mOffTextView.setTextColor(R.color.white);
+            LayoutInflater mInflater = (LayoutInflater) getApplicationContext()
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view = mInflater.inflate(R.layout.warning_dialog, null);
 
-            mDialog = new AlertDialog.Builder(this)
-                    .setTitle("执行警告")
+            LinearLayout linearLayout;
+            linearLayout = view.findViewById(R.id.warning_dialog);
+            TextView textView;
+            textView = view.findViewById(R.id.warning_text);
+
+            mDialog = new AlertDialog.Builder(this,R.style.warningDialog)
+                    .setTitle("警告")
                     .setCancelable(false)
-                    .setView(mOffTextView)
+                    .setView(linearLayout)
                     .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.cancel();
                             mOffTime.cancel();
                             isNeed=false;
                         }
-                    })
-                    .create();
+                    }).create();
             mDialog.show();
             WindowManager.LayoutParams params = mDialog.getWindow().getAttributes();
             params.width = 1000;
             params.height = 1000;
+
             mDialog.getWindow().setAttributes(params);
             mDialog.setCanceledOnTouchOutside(false);
 
@@ -228,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
                     if (msg.what > 0) {
 
                         //动态显示倒计时
-                        mOffTextView.setText("检测到您受到剧烈撞击，即将自动发送求救短信与拨打求救电话，如需取消，请在倒计时前结束前取消    即将执行，剩余时间："+msg.what);
+                        textView.setText("检测到您受到剧烈撞击，即将自动发送求救短信与拨打求救电话，如需取消，请在倒计时前结束前取消    即将执行，剩余时间："+msg.what);
 
                     } else {
                         //倒计时结束自动关闭f
@@ -265,6 +290,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     public void rescue(){
         Uri uri=Uri.parse("tel:120");//求救号码
         startActivity(new Intent(Intent.ACTION_CALL,uri));
@@ -272,8 +298,48 @@ public class MainActivity extends AppCompatActivity {
         SmsManager smsManager=SmsManager.getDefault();
         //短信号码
 //        String text = getPosition();
-        smsManager.sendTextMessage("10086", null, "text", null, null);
-        Toast.makeText(this, "求救短信已经发出", Toast.LENGTH_SHORT).show();
+        try {
+            mLocationClient = new AMapLocationClient(getApplicationContext());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mLocationOption = new AMapLocationClientOption();
+        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        mLocationOption.setOnceLocation(true);
+        mLocationOption.setOnceLocationLatest(true);
+        mLocationOption.setNeedAddress(true);
+
+        mLocationListener = new AMapLocationListener() {
+            @Override
+            public void onLocationChanged(AMapLocation amapLocation) {
+                if (amapLocation != null) {
+                    if (amapLocation.getErrorCode() == 0) {
+                        //可在其中解析amapLocation获取相应内容。
+                        String la = String.valueOf(amapLocation.getLatitude());
+                        String lo = String.valueOf(amapLocation.getLongitude());
+                        String address = amapLocation.getAddress();
+                        Date date = new Date();
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        String time = simpleDateFormat.format(date);
+                        String warn = "我在以下位置可能遭遇了严重车祸需要紧急救援\n"+"经度:"+la+"\n纬度:"+lo+"\n详细位置:"+address+"\n";
+                        System.out.println(warn);
+                        smsManager.sendTextMessage("10001", null, warn, null, null);
+                        Toast.makeText(getApplicationContext(), "求救短信已经发出", Toast.LENGTH_SHORT).show();
+                    }else {
+                        //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
+                        Log.e("AmapError","location Error, ErrCode:"
+                                + amapLocation.getErrorCode() + ", errInfo:"
+                                + amapLocation.getErrorInfo());
+                    }
+                }
+            }
+        };
+
+        mLocationClient.setLocationOption(mLocationOption);
+        mLocationClient.setLocationListener(mLocationListener);
+        mLocationClient.startLocation();
+
+
     }
 
 
@@ -285,6 +351,10 @@ public class MainActivity extends AppCompatActivity {
         return currentTemperature;
     }
 
-
+    public static void closeRun(){
+        pool.shutdown();
+        time.cancel();
+        instance.finish();
+    }
 
 }

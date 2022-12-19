@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.track.R;
 import com.example.track.ChangeTrackInfoActivity;
+import com.example.track.SettingActivity;
 import com.example.track.entity.Mine;
 
 import java.util.List;
@@ -66,7 +67,9 @@ public class MineRecycleViewAdapter extends RecyclerView.Adapter<MineRecycleView
                         holder.itemView.getContext().startActivity(intent);
                         break;
                     case 1:
-
+                        Intent intent2 = new Intent(holder.itemView.getContext(), SettingActivity.class);
+                        holder.itemView.getContext().startActivity(intent2);
+                        break;
                 }
             }
         });
@@ -79,6 +82,9 @@ public class MineRecycleViewAdapter extends RecyclerView.Adapter<MineRecycleView
                         holder.itemView.getContext().startActivity(intent);
                         break;
                     case 1:
+                        Intent intent2 = new Intent(holder.itemView.getContext(), SettingActivity.class);
+                        holder.itemView.getContext().startActivity(intent2);
+                        break;
 
                 }
             }
@@ -92,6 +98,9 @@ public class MineRecycleViewAdapter extends RecyclerView.Adapter<MineRecycleView
                         holder.itemView.getContext().startActivity(intent);
                         break;
                     case 1:
+                        Intent intent2 = new Intent(holder.itemView.getContext(), SettingActivity.class);
+                        holder.itemView.getContext().startActivity(intent2);
+                        break;
 
                 }
             }
@@ -105,6 +114,9 @@ public class MineRecycleViewAdapter extends RecyclerView.Adapter<MineRecycleView
                         holder.itemView.getContext().startActivity(intent);
                         break;
                     case 1:
+                        Intent intent2 = new Intent(holder.itemView.getContext(), SettingActivity.class);
+                        holder.itemView.getContext().startActivity(intent2);
+                        break;
 
                 }
             }

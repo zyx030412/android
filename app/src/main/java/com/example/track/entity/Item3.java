@@ -4,7 +4,7 @@ public class Item3 {
 
     private int id;
     private String str;
-    private final String watch = "正常";
+    private String watch = "正常";
 
 
     public int getId() {

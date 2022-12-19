@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/drawable/back.xml" value="0.2065" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/drawable/bottom_line.xml" value="0.1895" />
+        <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/drawable/dialog_style.xml" value="0.2105" />
+        <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/drawable/exit_login.xml" value="0.2105" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2145" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/drawable/item1_map.xml" value="0.2145" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/drawable/item1_recycleview.xml" value="0.2145" />
@@ -31,6 +33,7 @@
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/activity_register.xml" value="0.33" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/activity_rescue.xml" value="0.35520833333333335" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/activity_set_car_info.xml" value="0.33" />
+        <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/activity_setting.xml" value="0.3578125" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/activity_temperature_data.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/adapter_inputtips.xml" value="0.2125" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/dialog_date_picker.xml" value="0.20364583333333333" />
@@ -64,6 +67,8 @@
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/recycleview_body_qrcode_item4.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/recycleview_item1.xml" value="0.3463541666666667" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/recycleview_mine.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/recycleview_setting.xml" value="0.3703125" />
+        <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/layout/warning_dialog.xml" value="0.35520833333333335" />
         <entry key="..\:/Users/23653/AndroidStudioProjects/Track/app/src/main/res/xml/network_security_config.xml" value="0.17291666666666666" />
         <entry key="..\:/Users/23653/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.3619791666666667" />
       </map>

@@ -38,9 +38,9 @@ public class Item1Adapter extends RecyclerView.Adapter{
                 public void onClick(View v) {
                     int familynumber = 11111;                                    //个人信息界面界面中输入
 
-                    AlertDialog alertDialog2 = new AlertDialog.Builder(context)
-                            .setTitle("联系紧急联系人")
-                            .setMessage("是否要联系紧急联系人")
+                    AlertDialog alertDialog2 = new AlertDialog.Builder(context,R.style.warningDialog)
+                            .setTitle("紧急求救")
+                            .setMessage("是否要紧急求救")
                             .setIcon(R.mipmap.brake)
                             .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                 @Override
@@ -69,9 +69,9 @@ public class Item1Adapter extends RecyclerView.Adapter{
                 public void onClick(View v) {
                     int familynumber = 11111;                                    //个人信息界面界面中输入
 
-                    AlertDialog alertDialog2 = new AlertDialog.Builder(context)
-                            .setTitle("联系紧急联系人")
-                            .setMessage("是否要联系紧急联系人")
+                    AlertDialog alertDialog2 = new AlertDialog.Builder(context,R.style.warningDialog)
+                            .setTitle("紧急求救")
+                            .setMessage("是否要紧急求救")
                             .setIcon(R.mipmap.brake)
                             .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                 @Override
@@ -83,7 +83,7 @@ public class Item1Adapter extends RecyclerView.Adapter{
 
                                     SmsManager smsManager=SmsManager.getDefault();
                                     //短信号码
-                                    smsManager.sendTextMessage("10086", null, "MainActivity.getPosition()", null, null);
+//                                    smsManager.sendTextMessage("10086", null, "MainActivity.getPosition()", null, null);
                                     Toast.makeText(context, "求救短信已经发出", Toast.LENGTH_SHORT).show();
 
 
@@ -108,7 +108,7 @@ public class Item1Adapter extends RecyclerView.Adapter{
                 public void onClick(View v) {
                     int sos = 110;
 
-                    AlertDialog alertDialog3 = new AlertDialog.Builder(context)
+                    AlertDialog alertDialog3 = new AlertDialog.Builder(context,R.style.warningDialog)
                             .setTitle("报警")
                             .setMessage("是否要报警")
                             .setIcon(R.mipmap.brake)
@@ -143,7 +143,7 @@ public class Item1Adapter extends RecyclerView.Adapter{
                 public void onClick(View v) {
                     int sos = 110;
 
-                    AlertDialog alertDialog3 = new AlertDialog.Builder(context)
+                    AlertDialog alertDialog3 = new AlertDialog.Builder(context,R.style.warningDialog)
                             .setTitle("报警")
                             .setMessage("是否要报警")
                             .setIcon(R.mipmap.brake)

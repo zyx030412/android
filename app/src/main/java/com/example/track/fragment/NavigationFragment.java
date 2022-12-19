@@ -1,5 +1,6 @@
 package com.example.track.fragment;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,11 +30,26 @@ import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.AMap.OnMarkerClickListener;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.maps.model.Poi;
+import com.amap.api.navi.AMapNavi;
+import com.amap.api.navi.AMapNaviListener;
 import com.amap.api.navi.AmapNaviPage;
 import com.amap.api.navi.AmapNaviParams;
 import com.amap.api.navi.AmapNaviType;
 import com.amap.api.navi.AmapPageType;
+import com.amap.api.navi.enums.AMapNaviRouteNotifyDataType;
+import com.amap.api.navi.model.AMapCalcRouteResult;
 import com.amap.api.navi.model.AMapCarInfo;
+import com.amap.api.navi.model.AMapLaneInfo;
+import com.amap.api.navi.model.AMapModelCross;
+import com.amap.api.navi.model.AMapNaviCameraInfo;
+import com.amap.api.navi.model.AMapNaviCross;
+import com.amap.api.navi.model.AMapNaviLocation;
+import com.amap.api.navi.model.AMapNaviRouteNotifyData;
+import com.amap.api.navi.model.AMapNaviTrafficFacilityInfo;
+import com.amap.api.navi.model.AMapServiceAreaInfo;
+import com.amap.api.navi.model.AimLessModeCongestionInfo;
+import com.amap.api.navi.model.AimLessModeStat;
+import com.amap.api.navi.model.NaviInfo;
 import com.amap.api.navi.model.NaviPoi;
 import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
@@ -41,6 +57,7 @@ import com.amap.api.services.help.Tip;
 import com.amap.api.services.poisearch.PoiSearch.OnPoiSearchListener;
 
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 import com.amap.api.services.core.PoiItem;
 import com.amap.api.services.core.SuggestionCity;
@@ -68,6 +85,7 @@ public class NavigationFragment extends Fragment implements
     public AMapLocationListener mLocationListener = null;
     //声明AMapLocationClientOption对象
     public AMapLocationClientOption mLocationOption = null;
+    public AMapNavi mAMapNavi;
 
     private AMap mAMap;
     private String mKeyWords = "";// 要输入的poi搜索关键字
@@ -128,12 +146,20 @@ public class NavigationFragment extends Fragment implements
                     // 启动组件
                     AmapNaviPage.getInstance().showRouteActivity(getContext(), params, null);
 
+
+
+
                     try {
                         mLocationClient = new AMapLocationClient(getContext());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
 
+                    try {
+                        addMapNaviListener(getContext());
+                    } catch (com.amap.api.maps.AMapException e) {
+                        e.printStackTrace();
+                    }
 
                     //初始化AMapLocationClientOption对象
                     mLocationOption = new AMapLocationClientOption();
@@ -159,7 +185,7 @@ public class NavigationFragment extends Fragment implements
                                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                     String startTime = simpleDateFormat.format(date);
                                     Trip trip = new Trip(1145.14,"20",15,startTime,startTime,startAddress,endAddress,startLo,endLo,startLa,endLa,MainActivity.getUser());
-                                    new StoreService().storeTrip(trip);
+//                                    new StoreService().storeTrip(trip);
                                     System.out.println(trip.toString());
                                 }else {
                                     //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
@@ -170,7 +196,6 @@ public class NavigationFragment extends Fragment implements
                             }
                         }
                     };
-
 
                     mLocationClient.setLocationOption(mLocationOption);
                     mLocationClient.setLocationListener(mLocationListener);
@@ -457,5 +482,208 @@ public class NavigationFragment extends Fragment implements
             default:
                 break;
         }
+
+
+    }
+    public void addMapNaviListener(Context context) throws com.amap.api.maps.AMapException {
+
+        mAMapNavi = AMapNavi.getInstance(context);
+        // 1.注册一般导航事件与数据监听
+        mAMapNavi.addAMapNaviListener(new AMapNaviListener() {
+            @Override
+            public void onInitNaviFailure() {
+
+            }
+
+            @Override
+            public void onInitNaviSuccess() {
+
+            }
+
+            @Override
+            public void onStartNavi(int i) {
+
+            }
+
+            @Override
+            public void onTrafficStatusUpdate() {
+
+            }
+
+            @Override
+            public void onLocationChange(AMapNaviLocation aMapNaviLocation) {
+
+            }
+
+            @Override
+            public void onGetNavigationText(int i, String s) {
+
+            }
+
+            @Override
+            public void onGetNavigationText(String s) {
+
+            }
+
+            @Override
+            public void onEndEmulatorNavi() {
+
+            }
+
+            @Override
+            public void onArriveDestination() {
+                //到达目的地后回调函数。
+
+
+
+            }
+
+            @Override
+            public void onCalculateRouteFailure(int i) {
+
+            }
+
+            @Override
+            public void onReCalculateRouteForYaw() {
+
+            }
+
+            @Override
+            public void onReCalculateRouteForTrafficJam() {
+
+            }
+
+            @Override
+            public void onArrivedWayPoint(int i) {
+
+            }
+
+            @Override
+            public void onGpsOpenStatus(boolean b) {
+
+            }
+
+            @Override
+            public void onNaviInfoUpdate(NaviInfo naviInfo) {
+                //导航信息
+
+            }
+
+            @Override
+            public void updateCameraInfo(AMapNaviCameraInfo[] aMapNaviCameraInfos) {
+
+            }
+
+            @Override
+            public void updateIntervalCameraInfo(AMapNaviCameraInfo aMapNaviCameraInfo, AMapNaviCameraInfo aMapNaviCameraInfo1, int i) {
+
+            }
+
+            @Override
+            public void onServiceAreaUpdate(AMapServiceAreaInfo[] aMapServiceAreaInfos) {
+
+            }
+
+            @Override
+            public void showCross(AMapNaviCross aMapNaviCross) {
+
+            }
+
+            @Override
+            public void hideCross() {
+
+            }
+
+            @Override
+            public void showModeCross(AMapModelCross aMapModelCross) {
+
+            }
+
+            @Override
+            public void hideModeCross() {
+
+            }
+
+            @Override
+            public void showLaneInfo(AMapLaneInfo[] aMapLaneInfos, byte[] bytes, byte[] bytes1) {
+
+            }
+
+            @Override
+            public void showLaneInfo(AMapLaneInfo aMapLaneInfo) {
+
+            }
+
+            @Override
+            public void hideLaneInfo() {
+
+            }
+
+            @Override
+            public void onCalculateRouteSuccess(int[] ints) {
+
+            }
+
+            @Override
+            public void notifyParallelRoad(int i) {
+
+            }
+
+            @Override
+            public void OnUpdateTrafficFacility(AMapNaviTrafficFacilityInfo[] aMapNaviTrafficFacilityInfos) {
+
+            }
+
+            @Override
+            public void OnUpdateTrafficFacility(AMapNaviTrafficFacilityInfo aMapNaviTrafficFacilityInfo) {
+
+            }
+
+            @Override
+            public void updateAimlessModeStatistics(AimLessModeStat aimLessModeStat) {
+
+            }
+
+            @Override
+            public void updateAimlessModeCongestionInfo(AimLessModeCongestionInfo aimLessModeCongestionInfo) {
+
+            }
+
+            @Override
+            public void onPlayRing(int i) {
+
+            }
+
+            @Override
+            public void onCalculateRouteSuccess(AMapCalcRouteResult aMapCalcRouteResult) {
+
+            }
+
+            @Override
+            public void onCalculateRouteFailure(AMapCalcRouteResult aMapCalcRouteResult) {
+
+            }
+
+            @Override
+            public void onNaviRouteNotify(AMapNaviRouteNotifyData aMapNaviRouteNotifyData) {
+                //导航过程中道路信息通知 注意：该接口仅驾车模式有效 导航过程中针对拥堵区域、限行区域、禁行区域、道路封闭等情况的躲避通知。
+                if (aMapNaviRouteNotifyData.getNotifyType() == AMapNaviRouteNotifyDataType.AVOID_JAM_AREA){
+                    Toast.makeText(context, "前方道路拥挤，请注意行驶!", Toast.LENGTH_SHORT).show();
+                }else if(aMapNaviRouteNotifyData.getNotifyType() == AMapNaviRouteNotifyDataType.AVOID_RESTRICT_AREA){
+                    Toast.makeText(context, "前方遇到限行路段，请注意行驶!", Toast.LENGTH_SHORT).show();
+                }else if(aMapNaviRouteNotifyData.getNotifyType() == AMapNaviRouteNotifyDataType.DISPATCH){
+                    Toast.makeText(context, "前方遇到交警路线调度，请注意行驶!", Toast.LENGTH_SHORT).show();
+                }else if(aMapNaviRouteNotifyData.getNotifyType() == AMapNaviRouteNotifyDataType.FORBIDDEN_AREA){
+                    Toast.makeText(context, "前方遇到禁行路段，请注意绕道!", Toast.LENGTH_SHORT).show();
+                }else if(aMapNaviRouteNotifyData.getNotifyType() == AMapNaviRouteNotifyDataType.ROAD_CLOSED_AREA){
+                    Toast.makeText(context, "前方遇到道路关闭，请注意绕道!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onGpsSignalWeak(boolean b) {
+
+            }
+        });
     }
 }

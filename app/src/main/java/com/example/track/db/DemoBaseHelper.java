@@ -7,7 +7,7 @@ import com.example.track.db.DemoDbSchema.DemoTable;
 
 public class DemoBaseHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
-    private static final String DATABASE_NAME = "crimeBase.db";
+    private static final String DATABASE_NAME = "base1.db";
 
     public DemoBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);

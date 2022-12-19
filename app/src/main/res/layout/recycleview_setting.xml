@@ -4,54 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/setting_layout">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center"
-        android:layout_marginLeft="15dp">
+        android:layout_marginLeft="10dp">
 
-        <ImageButton
-            android:id="@+id/recycle_mine_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="1dp"
-            android:background="@color/white"/>
 
-        <Button
-            android:id="@+id/recycle_mine_text"
+
+        <TextView
+            android:id="@+id/recycle_setting_text"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="2dp"
             android:background="@color/white"
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:text=""/>
+
         <Space
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
 
         <ImageButton
-            android:id="@+id/recycle_mine_enter"
+            android:id="@+id/recycle_setting_enter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
             android:background="@color/white"
-            android:src="@mipmap/enter"
+            android:src="@mipmap/enter_40"
             android:layout_gravity="center"/>
     </LinearLayout>
 
-<!--    <View-->
-<!--        android:id="@+id/bottom_line"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="1.5dp"-->
-<!--        android:background="#dfdfdf"/>-->
+    <View
+        android:id="@+id/updownline"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_height="1dp"
+        android:background="#dfdfdf"/>
 
 </LinearLayout>
 
