@@ -4,34 +4,33 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.AMap.InfoWindowAdapter;
+import com.amap.api.maps.AMap.OnMarkerClickListener;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.SupportMapFragment;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
-import com.amap.api.maps.AMap.OnMarkerClickListener;
-import com.amap.api.maps.AMap.InfoWindowAdapter;
 import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
-import com.amap.api.services.help.Tip;
-import com.amap.api.services.poisearch.PoiSearch.OnPoiSearchListener;
-
-import android.view.View.OnClickListener;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-
 import com.amap.api.services.core.PoiItem;
 import com.amap.api.services.core.SuggestionCity;
+import com.amap.api.services.help.Tip;
 import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
-import com.example.track.model.PoiOverPlayModel;
+import com.amap.api.services.poisearch.PoiSearch.OnPoiSearchListener;
 import com.example.track.entity.Constants;
 import com.example.track.entity.ToastUtil;
+import com.example.track.model.PoiOverPlayModel;
+
 import java.util.List;
 
 public class NavigationActivity extends FragmentActivity implements

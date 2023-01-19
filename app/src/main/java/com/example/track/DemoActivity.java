@@ -1,56 +1,66 @@
 package com.example.track;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-import android.os.SystemClock;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.track.entity.Temperature;
+import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.concurrent.LinkedBlockingDeque;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 
 public class DemoActivity extends AppCompatActivity {
-    //用一个数组来listView的每一项数据
-    private String[] s = {"aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "ii", "ii", "ii", "ii", "ii", "ii", "ii", "ii", "ii", "ii", "ii", "ii", "ii", "ii", "ii", "ii", "ii", "ii", "ii", "ii", "ii", "ii", "ii", "ii"};
-    private ListView listView;
-    private RecyclerView mRecyclerView;
+
+    private AMapLocationClient mLocationClient;
+    private AMapLocationClientOption mLocationOption;
+    private AMapLocationListener mLocationListener;
+    private TextView mTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo);
 
+        mTextView = findViewById(R.id.demo_place);
+
+        try {
+            mLocationClient = new AMapLocationClient(getApplicationContext());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
-//        //通过id找到listView对象
-//        listView = findViewById(R.id.listView);
-//        //给listView设置ArrayAdapter，绑定数据
-//        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, s));
-//        listView.setCacheColorHint(Color.parseColor("#000000"));
+        //初始化AMapLocationClientOption对象
+        mLocationOption = new AMapLocationClientOption();
+        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        AMapLocationClientOption.setLocationProtocol(AMapLocationClientOption.AMapLocationProtocol.HTTPS);
+        mLocationOption.setOnceLocation(false);
+        mLocationOption.setNeedAddress(true);
+        mLocationListener = new AMapLocationListener() {
+            @Override
+            public void onLocationChanged(AMapLocation amapLocation) {
+                if (amapLocation != null) {
+                    if (amapLocation.getErrorCode() == 0) {
+                        System.out.println("定位:" + amapLocation.getAddress());
+                        System.out.println(amapLocation.toString());
+                        mTextView.setText(amapLocation.getAddress());
+                    }else {
+                        //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
+                        Log.e("AmapError","location Error, ErrCode:"
+                                + amapLocation.getErrorCode() + ", errInfo:"
+                                + amapLocation.getErrorInfo());
+                    }
+                }
+            }
+        };
 
-        mRecyclerView = findViewById(R.id.listView);
 
-
-
-
+        mLocationClient.setLocationOption(mLocationOption);
+        mLocationClient.setLocationListener(mLocationListener);
+        mLocationClient.startLocation();
     }
+
 
 }

@@ -1,14 +1,5 @@
 package com.example.track;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -25,28 +16,33 @@ import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
+import com.alibaba.fastjson.JSONObject;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-import com.amap.api.maps.MapsInitializer;
+import com.amap.api.navi.AmapNaviPage;
 import com.example.track.entity.Temperature;
 import com.example.track.entity.Trip;
 import com.example.track.entity.User;
 import com.example.track.fragment.MineBodyFragment;
 import com.example.track.fragment.NavigationFragment;
 import com.example.track.fragment.QrcodeBodyFragment;
-import com.example.track.model.View.CirStatisticGraph;
 import com.example.track.service.MainActivityUpdateService;
-import com.example.track.service.StoreService;
 
+import java.io.File;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Timer;
@@ -54,10 +50,10 @@ import java.util.TimerTask;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import java.util.zip.Inflater;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends MyActivity implements Serializable {
+    private static final String TAG ="MainActivity";
     private ImageButton mine,navigation,qrcode;
     private TextView mineText,homepageText,qrcodeText;
     private AMapLocationClient aMapLocationClient;
@@ -73,13 +69,15 @@ public class MainActivity extends AppCompatActivity {
     private Timer mOffTime;
     public static boolean isNeed;//是否需要救援
     public static int isRescue = 0;
-    private static User user = new User("18345264895","123321");
+//    private static User user = new User("18345264895","123321");
+    public static User user;
+    public static String fileUser = "user.csv";
+    public static int TypeUser = 0;
     public static Temperature currentTemperature;
-    public static Trip currentTrip;
     public static Activity instance;
     private static ThreadPoolExecutor pool;
-    private static Timer time;
-
+    private static Timer safety1s;
+    private Handler mOffHandler;
 
     private Handler handler1 = new Handler(Looper.myLooper()){
 //        int flag_1 = 0;
@@ -87,9 +85,9 @@ public class MainActivity extends AppCompatActivity {
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             if (msg.what == 0) {
-//                Toast.makeText(MainActivity.this, "网络请求失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "网络请求失败", Toast.LENGTH_SHORT).show();
             } else if (msg.what == 2) {
-//                Toast.makeText(MainActivity.this, "没有数据", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "没有数据", Toast.LENGTH_SHORT).show();
             } else if (msg.what == 1) {
 
                 Temperature temperature = (Temperature) msg.obj;
@@ -106,28 +104,38 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
-    private Handler mOffHandler;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_index);
-        instance = this;
-        //绑定实例
+        File file = new File(getFilesDir(), "user.csv");
+        if (!file.exists()) {
+//        if (!file.exists()||true) {
+            super.onCreate(savedInstanceState);
+//        不是main页面
+            setContentView(R.layout.activity_index);
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        } else {
+            Log.d(TAG, "本地存在User信息");
+            super.onCreate(savedInstanceState);
+            //        不是main页面
+            setContentView(R.layout.activity_index);
+            instance = this;
+//读取用户文件中的数据转化为User对象
+            user = JSONObject.parseObject(UtilsFile.loadOpenFile("user.csv", getApplicationContext()), User.class);
+            Log.d(TAG, "user.toString():" + user.toString());
+            //绑定实例
+        }
         mine = findViewById(R.id.mine);
         navigation = findViewById(R.id.navigation);
         qrcode = findViewById(R.id.qrcode);
         mineText = findViewById(R.id.mine_text);
         homepageText = findViewById(R.id.navigation_text);
         qrcodeText = findViewById(R.id.qrcode_text);
+//        管理器zyy
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentById(R.id.index_body_fragment_container);
 
         isNeed = false;
-
-
-
         AMapLocationClient.updatePrivacyShow(getApplicationContext(), true, true);
         AMapLocationClient.updatePrivacyAgree(getApplicationContext(), true);
 
@@ -135,17 +143,18 @@ public class MainActivity extends AppCompatActivity {
         Fragment homepageFragment = new NavigationFragment();
         Fragment qrcodeFragment = new QrcodeBodyFragment();
         Fragment mineFragment = new MineBodyFragment();
-        fragmentManager.beginTransaction().add(R.id.index_body_fragment_container,mineFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.index_body_fragment_container, mineFragment).commit();
         fragmentManager.beginTransaction().hide(mineFragment).commit();
-        fragmentManager.beginTransaction().add(R.id.index_body_fragment_container,homepageFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.index_body_fragment_container, homepageFragment).commit();
         fragmentManager.beginTransaction().hide(homepageFragment).commit();
-        fragmentManager.beginTransaction().add(R.id.index_body_fragment_container,qrcodeFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.index_body_fragment_container, qrcodeFragment).commit();
         fragmentManager.beginTransaction().hide(qrcodeFragment).commit();
         fragmentManager.beginTransaction().show(homepageFragment).commit();
 
         homepageText.setTextColor(Color.parseColor("#0582E8"));
         navigation.setImageResource(R.mipmap.navigation_blue);
 
+//        点击个人主页面时
         mine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
                 navigation.setImageResource(R.mipmap.navigation_black);
                 mine.setImageResource(R.mipmap.mine_blue);
                 qrcode.setImageResource(R.mipmap.qrcode_black);
+//                ?????调用fragmentManager
                 fragmentManager.beginTransaction().hide(homepageFragment).commit();
                 fragmentManager.beginTransaction().hide(qrcodeFragment).commit();
                 fragmentManager.beginTransaction().show(mineFragment).commit();
@@ -196,29 +206,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        pool = new ThreadPoolExecutor(3,9,1, TimeUnit.SECONDS,new LinkedBlockingDeque<Runnable>(128));
+        pool = new ThreadPoolExecutor(3, 9, 1, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>(128));
 
-        time = new Timer();
-        time.schedule(new TimerTask() {
+        safety1s = new Timer();
+        safety1s.schedule(new TimerTask() {
             @Override
             public void run() {
                 Runnable temperatureRunnable = new MainActivityUpdateService().getCurrentTemperature(handler1);
                 pool.execute(temperatureRunnable);
             }
-        },0,2000);
-
-
+        }, 0, 2000);
 
 /**
  * 以下为报警组件
  */
+        }
 
-
-    }
 
     @SuppressLint("ResourceAsColor")
     void initDialog(){
         if (isRescue == 0){
+            AmapNaviPage.getInstance().exitRouteActivity();
             LayoutInflater mInflater = (LayoutInflater) getApplicationContext()
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = mInflater.inflate(R.layout.warning_dialog, null);
@@ -228,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
             TextView textView;
             textView = view.findViewById(R.id.warning_text);
 
-            mDialog = new AlertDialog.Builder(this,R.style.warningDialog)
+            mDialog = new AlertDialog.Builder(this, R.style.warningDialog)
                     .setTitle("警告")
                     .setCancelable(false)
                     .setView(linearLayout)
@@ -290,7 +298,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     public void rescue(){
         Uri uri=Uri.parse("tel:120");//求救号码
         startActivity(new Intent(Intent.ACTION_CALL,uri));
@@ -339,9 +346,7 @@ public class MainActivity extends AppCompatActivity {
         mLocationClient.setLocationListener(mLocationListener);
         mLocationClient.startLocation();
 
-
     }
-
 
     public static String getUser(){
         return user.getUsername();
@@ -353,8 +358,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static void closeRun(){
         pool.shutdown();
-        time.cancel();
+        safety1s.cancel();
         instance.finish();
+        QrcodeBodyFragment.time60s.cancel();
     }
 
 }

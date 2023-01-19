@@ -76,11 +76,12 @@
                             android:textColor="@color/black"
                             android:textSize="15dp"/>
 
-                        <Button
+                        <TextView
                             android:id="@+id/change_car_number1"
                             android:layout_width="35dp"
                             android:layout_height="50dp"
-                            android:textSize="20dp"
+                            android:autoSizeTextType="uniform"
+                            android:padding="8dp"
                             android:layout_marginLeft="10dp"
                             android:textColor="@color/white"
                             android:text="浙"
@@ -179,33 +180,36 @@
                             >
 
 
-                            <Button
+                            <TextView
                                 android:id="@+id/change_car_type1"
                                 android:layout_width="80dp"
                                 android:layout_height="30dp"
-                                android:textSize="15dp"
+                                android:autoSizeTextType="uniform"
+                                android:padding="4dp"
                                 android:layout_marginLeft="10dp"
                                 android:textColor="@color/black"
                                 android:text="小型货车"
                                 android:gravity="center"
                                 android:background="@drawable/number_choose_button"/>
 
-                            <Button
+                            <TextView
                                 android:id="@+id/change_car_type2"
                                 android:layout_width="80dp"
                                 android:layout_height="30dp"
-                                android:textSize="15dp"
+                                android:autoSizeTextType="uniform"
+                                android:padding="4dp"
                                 android:layout_marginLeft="10dp"
                                 android:textColor="@color/black"
                                 android:text="中型货车"
                                 android:gravity="center"
                                 android:background="@drawable/number_choose_button"/>
 
-                            <Button
+                            <TextView
                                 android:id="@+id/change_car_type3"
                                 android:layout_width="80dp"
                                 android:layout_height="30dp"
-                                android:textSize="15dp"
+                                android:autoSizeTextType="uniform"
+                                android:padding="4dp"
                                 android:layout_marginLeft="10dp"
                                 android:textColor="@color/black"
                                 android:text="大型货车"
@@ -240,44 +244,48 @@
                             >
 
 
-                            <Button
+                            <TextView
                                 android:id="@+id/change_power_type1"
                                 android:layout_width="50dp"
                                 android:layout_height="30dp"
-                                android:textSize="15dp"
+                                android:autoSizeTextType="uniform"
+                                android:padding="4dp"
                                 android:layout_marginLeft="10dp"
                                 android:textColor="@color/black"
                                 android:text="汽油"
                                 android:gravity="center"
                                 android:background="@drawable/number_choose_button"/>
 
-                            <Button
+                            <TextView
                                 android:id="@+id/change_power_type2"
                                 android:layout_width="50dp"
                                 android:layout_height="30dp"
-                                android:textSize="15dp"
+                                android:autoSizeTextType="uniform"
+                                android:padding="4dp"
                                 android:layout_marginLeft="10dp"
                                 android:textColor="@color/black"
                                 android:text="柴油"
                                 android:gravity="center"
                                 android:background="@drawable/number_choose_button"/>
 
-                            <Button
+                            <TextView
                                 android:id="@+id/change_power_type3"
                                 android:layout_width="65dp"
                                 android:layout_height="30dp"
-                                android:textSize="15dp"
+                                android:autoSizeTextType="uniform"
+                                android:padding="4dp"
                                 android:layout_marginLeft="10dp"
                                 android:textColor="@color/black"
                                 android:text="纯电动"
                                 android:gravity="center"
                                 android:background="@drawable/number_choose_button"/>
 
-                            <Button
+                            <TextView
                                 android:id="@+id/change_power_type4"
                                 android:layout_width="85dp"
                                 android:layout_height="30dp"
-                                android:textSize="15dp"
+                                android:autoSizeTextType="uniform"
+                                android:padding="4dp"
                                 android:layout_marginLeft="10dp"
                                 android:textColor="@color/black"
                                 android:text="插电混合"
@@ -563,7 +571,7 @@
                                 android:orientation="horizontal"
                                 >
 
-                                <Button
+                                <TextView
                                     android:id="@+id/change_zhou1"
                                     android:layout_width="50dp"
                                     android:layout_height="30dp"
@@ -572,46 +580,51 @@
                                     android:gravity="center"
                                     android:text="2轴"
                                     android:textColor="@color/black"
-                                    android:textSize="15dp" />
+                                    android:autoSizeTextType="uniform"
+                                    android:padding="4dp"/>
 
-                                <Button
+                                <TextView
                                     android:id="@+id/change_zhou2"
                                     android:layout_width="50dp"
                                     android:layout_height="30dp"
-                                    android:textSize="15dp"
+                                    android:autoSizeTextType="uniform"
+                                    android:padding="4dp"
                                     android:layout_marginLeft="10dp"
                                     android:textColor="@color/black"
                                     android:text="3轴"
                                     android:gravity="center"
                                     android:background="@drawable/number_choose_button"/>
 
-                                <Button
+                                <TextView
                                     android:id="@+id/change_zhou3"
                                     android:layout_width="50dp"
                                     android:layout_height="30dp"
-                                    android:textSize="15dp"
+                                    android:autoSizeTextType="uniform"
+                                    android:padding="4dp"
                                     android:layout_marginLeft="10dp"
                                     android:textColor="@color/black"
                                     android:text="4轴"
                                     android:gravity="center"
                                     android:background="@drawable/number_choose_button"/>
 
-                                <Button
+                                <TextView
                                     android:id="@+id/change_zhou4"
                                     android:layout_width="50dp"
                                     android:layout_height="30dp"
-                                    android:textSize="15dp"
+                                    android:autoSizeTextType="uniform"
+                                    android:padding="4dp"
                                     android:layout_marginLeft="10dp"
                                     android:textColor="@color/black"
                                     android:text="5轴"
                                     android:gravity="center"
                                     android:background="@drawable/number_choose_button"/>
 
-                                <Button
+                                <TextView
                                     android:id="@+id/change_zhou5"
                                     android:layout_width="90dp"
                                     android:layout_height="30dp"
-                                    android:textSize="15dp"
+                                    android:autoSizeTextType="uniform"
+                                    android:padding="4dp"
                                     android:layout_marginLeft="10dp"
                                     android:textColor="@color/black"
                                     android:text="6轴及以上"
@@ -638,15 +651,17 @@
             android:layout_height="wrap_content"
             android:padding="10dp">
 
-            <Button
+            <TextView
                 android:id="@+id/change_submit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/retangle_register_button"
                 android:text="完成"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:gravity="center"
+                android:autoSizeTextType="uniform"
+                android:padding="5dp"/>
 
         </RelativeLayout>
     </LinearLayout>
@@ -670,7 +685,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <Button
+                <TextView
                     android:id="@+id/q1"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -681,7 +696,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q2"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -692,7 +707,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q3"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -703,7 +718,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q4"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -714,7 +729,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q5"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -725,7 +740,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q6"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -736,7 +751,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q7"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -747,7 +762,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q8"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -758,7 +773,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q9"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -769,7 +784,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q10"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -788,7 +803,7 @@
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
-                <Button
+                <TextView
                     android:id="@+id/q11"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -799,7 +814,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q12"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -810,7 +825,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q13"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -821,7 +836,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q14"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -832,7 +847,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q15"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -843,7 +858,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q16"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -854,7 +869,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q17"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -865,7 +880,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q18"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -876,7 +891,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q19"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -887,7 +902,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q20"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -906,7 +921,7 @@
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
-                <Button
+                <TextView
                     android:id="@+id/q21"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -917,7 +932,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q22"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -928,7 +943,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q23"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -939,7 +954,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q24"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -950,7 +965,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q25"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -961,7 +976,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q26"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -972,7 +987,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q27"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -983,7 +998,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q28"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -994,7 +1009,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q29"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -1005,7 +1020,7 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/q30"
                     android:layout_width="35dp"
                     android:layout_height="50dp"
@@ -1024,7 +1039,7 @@
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
-                <Button
+                <TextView
                     android:id="@+id/q31"
                     android:layout_width="35dp"
                     android:layout_height="50dp"

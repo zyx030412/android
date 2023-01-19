@@ -1,6 +1,9 @@
 <resources>
 
-    <string name="app_name">Track</string>
+    <string name="app_name">智慧货车</string>
     <string name="home">Track</string>
     <string name="no_result">对不起，没有搜索到相关数据！</string>
+    //strings.xml中添加限制密码类型只能时数字
+    <string name="pwd_format">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,.!@#$%^*</string>
+
 </resources>

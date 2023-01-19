@@ -5,14 +5,14 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.track.R;
 import com.example.track.ChangeTrackInfoActivity;
+import com.example.track.R;
 import com.example.track.SettingActivity;
 import com.example.track.entity.Mine;
 
@@ -25,7 +25,7 @@ public class MineRecycleViewAdapter extends RecyclerView.Adapter<MineRecycleView
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         ImageButton itemImage;
-        Button itemText;
+        TextView itemText;
         ImageButton enter;
 //        View line;
 

@@ -2,11 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="20dp"
     >
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listView"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:id="@+id/demo_place"
+        android:text="默认"
+        android:textColor="@color/black"
+        android:textSize="50dp"/>
 
 </LinearLayout>

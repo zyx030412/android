@@ -20,7 +20,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.track.entity.Temperature;
-import com.example.track.entity.User;
 import com.example.track.model.datepicker.CustomDatePicker;
 import com.example.track.model.datepicker.DateFormatUtils;
 import com.github.mikephil.charting.animation.Easing;
@@ -36,7 +35,6 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +63,7 @@ public class Temperature1Activity extends Activity implements View.OnClickListen
             }else if(msg.what == 1){
                 mSafetyList = (List<Temperature>) msg.obj;
                 if (mSafetyList.toString()=="[]"){
-                    return;
+
                 }
                 SetYAxis();//
                 SetXAxis();
@@ -77,10 +75,6 @@ public class Temperature1Activity extends Activity implements View.OnClickListen
                 chart.invalidate();//图形刷新
             }
         }
-
-
-
-
     };
 
 
@@ -88,7 +82,7 @@ public class Temperature1Activity extends Activity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_body_qrcode_item3_temperature);
-        mMain_LinearLayout=findViewById(R.id.LinearLayout_list_item_temperature);
+//        mMain_LinearLayout=findViewById(R.id.LinearLayout_list_item_temperature);
         chart = (LineChart) findViewById(R.id.chart);
         findViewById(R.id.ll_date).setOnClickListener(this);//对应第一个LinearLayout控件
         mTvSelectedDate = findViewById(R.id.tv_selected_date);//后面的可改变日期
@@ -131,7 +125,7 @@ public class Temperature1Activity extends Activity implements View.OnClickListen
     }
 
     @Override
-    protected void onDestroy() {//?????
+    protected void onDestroy() {
         super.onDestroy();
         mDatePicker.onDestroy();
     }
@@ -165,30 +159,6 @@ public class Temperature1Activity extends Activity implements View.OnClickListen
         // 不允许滚动动画
         mDatePicker.setCanShowAnim(false);
     }
-//    private void initTimerPicker() {
-//        String beginTime = "2018-10-17 18:00";
-//        String endTime = DateFormatUtils.long2Str(System.currentTimeMillis(), true);
-//
-//        mTvSelectedTime.setText(endTime);
-//
-//        // 通过日期字符串初始化日期，格式请用：yyyy-MM-dd HH:mm
-//        mTimerPicker = new CustomDatePicker(this, new CustomDatePicker.Callback() {
-//            @Override
-//            public void onTimeSelected(long timestamp) {
-//                mTvSelectedTime.setText(DateFormatUtils.long2Str(timestamp, true));
-//            }
-//        }, beginTime, endTime);
-//        // 允许点击屏幕或物理返回键关闭
-//        mTimerPicker.setCancelable(true);
-//        // 显示时和分
-//        mTimerPicker.setCanShowPreciseTime(true);
-//        // 允许循环滚动
-//        mTimerPicker.setScrollLoop(true);
-//        // 允许滚动动画
-//        mTimerPicker.setCanShowAnim(true);
-//    }
-//        ------------------------
-
 
     /**
      * 下面时折线图对应的方法

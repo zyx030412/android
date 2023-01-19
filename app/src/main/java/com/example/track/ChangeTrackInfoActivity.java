@@ -1,10 +1,8 @@
 package com.example.track;
 
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -22,10 +20,10 @@ import com.example.track.service.StoreService;
 public class ChangeTrackInfoActivity extends AppCompatActivity{
     private RelativeLayout carInfoSetArea;
     private ImageButton backButton;
-    private Button carNumber1,power1,power2,power3,power4,carType1,carType2,carType3,zhou1,zhou2,zhou3,zhou4,zhou5,submit;
+    private TextView carNumber1,power1,power2,power3,power4,carType1,carType2,carType3,zhou1,zhou2,zhou3,zhou4,zhou5,submit;
     private EditText carNumber2,carNumber3,carNumber4,carNumber5,carNumber6,carNumber7,eSeek1,eSeek2,eSeek3,eSeek4,eSeek5;
     private SeekBar seek1,seek2,seek3,seek4,seek5;
-    private Button q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,q30,q31;
+    private TextView q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,q30,q31;
     private String total_weight,approved_load,length,width,height;
     private int plateFlag = 0,carTypeFlag,powerTypeFlag,zhouFlag;
 

@@ -18,7 +18,26 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SEND_SMS" /> <!-- 阅读消息 -->
     <uses-permission android:name="android.permission.READ_SMS" /> <!-- 写入消息 -->
-    <uses-permission android:name="android.permission.WRITE_SMS" />
+    <uses-permission android:name="android.permission.WRITE_SMS" /> <!--  -->
+    <!-- 连接网络权限，用于执行云端语音能力 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 获取手机录音机使用权限，听写、识别、语义理解需要用到此权限 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" /> <!-- 读取网络信息状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 获取当前wifi状态 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 允许程序改变网络连接状态 -->
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" /> <!-- 读取手机信息权限 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 读取联系人权限，上传联系人需要用到此权限 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- 外存储写权限，构建语法需要用到此权限 -->
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="CoarseFineLocation" /> <!-- 外存储读权限，构建语法需要用到此权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 手机定位信息，用来为语义等功能提供定位，提供更精准的服务 -->
+    <!-- 定位信息是敏感信息，可通过Setting.setLocationEnable(false)关闭定位请求 -->
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION"
+        tools:ignore="CoarseFineLocation" /> <!-- 如需使用人脸识别，还要添加：摄相头权限，拍照需要用到 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -27,8 +46,16 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".floatwindow.BaseApplication"
         android:theme="@style/Theme.Track"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ForgetActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".SettingActivity"
             android:exported="false" />
@@ -46,22 +73,16 @@
             android:name=".TemperatureDataActivity"
             android:exported="false" />
         <activity
-            android:name=".ViewMap"
-            android:exported="false" />
-        <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".NavigationActivity"
-            android:exported="false" />
+            android:name=".PersonalInformationActivity"
+            android:exported="false"/>
         <activity
             android:name=".InputTipsActivity"
             android:exported="false" />
         <activity
             android:name=".ChangeTrackInfoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".DemoActivity"
             android:exported="false" />
         <activity
             android:name=".RescueActivity"
@@ -79,11 +100,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- <service android:name="com.amap.api.track.AMapTrackService" /> -->
-        <!-- <service android:name="com.amap.api.location.APSService" /> -->
+        </activity>
+
+
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="825f47893643373b84bd7b6e8bc38d5d" />
+            android:value="c95bf1c21f750df09c27b3251c3e9cb3" />
+
+        <service android:name="com.amap.api.location.APSService" />
     </application>
 
 </manifest>

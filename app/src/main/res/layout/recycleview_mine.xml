@@ -21,7 +21,7 @@
             android:layout_marginStart="1dp"
             android:background="@color/white"/>
 
-        <Button
+        <TextView
             android:id="@+id/recycle_mine_text"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
@@ -30,7 +30,8 @@
             android:layout_marginStart="10dp"
             android:background="@color/white"
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:autoSizeTextType="uniform"
+            android:padding="3dp"
             android:text=""/>
         <Space
             android:layout_width="wrap_content"
@@ -46,12 +47,11 @@
             android:src="@mipmap/enter"
             android:layout_gravity="center"/>
     </LinearLayout>
-
-<!--    <View-->
-<!--        android:id="@+id/bottom_line"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="1.5dp"-->
-<!--        android:background="#dfdfdf"/>-->
+    <View
+        android:id="@+id/bottom_line"
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:background="#dfdfdf"/>
 
 </LinearLayout>
 

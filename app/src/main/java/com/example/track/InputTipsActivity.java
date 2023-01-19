@@ -1,14 +1,15 @@
 package com.example.track;
 
 import android.app.Activity;
-import android.app.NativeActivity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.AdapterView.OnItemClickListener;
 
 import androidx.appcompat.widget.SearchView;
 
@@ -16,7 +17,6 @@ import com.amap.api.services.help.Inputtips;
 import com.amap.api.services.help.InputtipsQuery;
 import com.amap.api.services.help.Tip;
 import com.example.track.adapter.InputTipsAdapter;
-import com.example.track.model.PoiOverPlayModel;
 import com.example.track.entity.Constants;
 import com.example.track.entity.ToastUtil;
 
@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InputTipsActivity extends Activity implements SearchView.OnQueryTextListener, Inputtips.InputtipsListener, OnItemClickListener, View.OnClickListener {
-    private SearchView mSearchView;// 输入搜索关键字
+    private SearchView mSearchView;// 输入搜索关键字0
     private ImageView mBack;
     private ListView mInputListView;
     private List<Tip> mCurrentTipList;
@@ -35,16 +35,18 @@ public class InputTipsActivity extends Activity implements SearchView.OnQueryTex
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_tips);
         initSearchView();
-        mInputListView = (ListView) findViewById(R.id.inputtip_list);
+        mInputListView = findViewById(R.id.inputtip_list);
         mInputListView.setOnItemClickListener(this);
-        mBack = (ImageView) findViewById(R.id.back);
+        mBack = findViewById(R.id.back);
         mBack.setOnClickListener(this);
     }
 
     private void initSearchView() {
-        mSearchView = (SearchView) findViewById(R.id.keyWord);
+        mSearchView = findViewById(R.id.keyWord);
         mSearchView.setOnQueryTextListener(this);
-        //设置SearchView默认为展开显示
+        //设置SearchView默认为展开显示.
+        EditText txtSearch = (mSearchView.findViewById(androidx.appcompat.R.id.search_src_text));
+        txtSearch.setTextColor(Color.BLACK);
         mSearchView.setIconified(false);
         mSearchView.onActionViewExpanded();
         mSearchView.setIconifiedByDefault(true);

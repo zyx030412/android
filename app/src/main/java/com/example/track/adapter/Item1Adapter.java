@@ -8,19 +8,20 @@ import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.track.R;
 
 public class Item1Adapter extends RecyclerView.Adapter{
 
     static class ViewHolder extends RecyclerView.ViewHolder{
-        private Button call,sos,fix,brake;
+        private TextView call,sos,fix,brake;
         private ImageButton call_img,sos_img,fix_img,brake_img;
 
         public ViewHolder(@NonNull View itemView,Context context) {
@@ -38,7 +39,7 @@ public class Item1Adapter extends RecyclerView.Adapter{
                 public void onClick(View v) {
                     int familynumber = 11111;                                    //个人信息界面界面中输入
 
-                    AlertDialog alertDialog2 = new AlertDialog.Builder(context,R.style.warningDialog)
+                    AlertDialog alertDialog2 = new AlertDialog.Builder(context, R.style.warningDialog)
                             .setTitle("紧急求救")
                             .setMessage("是否要紧急求救")
                             .setIcon(R.mipmap.brake)
@@ -69,7 +70,7 @@ public class Item1Adapter extends RecyclerView.Adapter{
                 public void onClick(View v) {
                     int familynumber = 11111;                                    //个人信息界面界面中输入
 
-                    AlertDialog alertDialog2 = new AlertDialog.Builder(context,R.style.warningDialog)
+                    AlertDialog alertDialog2 = new AlertDialog.Builder(context, R.style.warningDialog)
                             .setTitle("紧急求救")
                             .setMessage("是否要紧急求救")
                             .setIcon(R.mipmap.brake)
@@ -108,7 +109,7 @@ public class Item1Adapter extends RecyclerView.Adapter{
                 public void onClick(View v) {
                     int sos = 110;
 
-                    AlertDialog alertDialog3 = new AlertDialog.Builder(context,R.style.warningDialog)
+                    AlertDialog alertDialog3 = new AlertDialog.Builder(context, R.style.warningDialog)
                             .setTitle("报警")
                             .setMessage("是否要报警")
                             .setIcon(R.mipmap.brake)
@@ -143,7 +144,7 @@ public class Item1Adapter extends RecyclerView.Adapter{
                 public void onClick(View v) {
                     int sos = 110;
 
-                    AlertDialog alertDialog3 = new AlertDialog.Builder(context,R.style.warningDialog)
+                    AlertDialog alertDialog3 = new AlertDialog.Builder(context, R.style.warningDialog)
                             .setTitle("报警")
                             .setMessage("是否要报警")
                             .setIcon(R.mipmap.brake)
@@ -169,6 +170,14 @@ public class Item1Adapter extends RecyclerView.Adapter{
             });
 
             fix.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent dialIntent =  new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + 132456));//跳转到拨号界面，同时传递电话号码
+                    context.startActivity(dialIntent);
+                }
+            });
+
+            fix_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent dialIntent =  new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + 132456));//跳转到拨号界面，同时传递电话号码

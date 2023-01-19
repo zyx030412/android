@@ -2,31 +2,41 @@ package com.example.track.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.track.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class QrcodeBodyFragment extends Fragment {
 
-    private Button button1,button2,button3,button4;
+    private TextView button1,button2,button3,button4;
     private TextView time;
+    public static Timer time60s;
+    private Handler handler1 = new Handler(Looper.myLooper()){
+        //        int flag_1 = 0;
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 0) {
+                update();
+            }
+        }
+    };
 
 
     @Override
@@ -51,10 +61,16 @@ public class QrcodeBodyFragment extends Fragment {
         button3 = v.findViewById(R.id.qrcode_item3);
         button4 = v.findViewById(R.id.qrcode_item4);
         time = v.findViewById(R.id.fragment_body_qrcode_time);
-        Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd HH:mm");
-        String update = sdf.format(date);
-        time.setText(update);
+
+        time60s = new Timer();
+        time60s.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Message success = new Message();
+                success.what = 0;
+                handler1.sendMessage(success);
+            }
+        },0,60000);
 
         button1.setTextColor(Color.parseColor("#000000"));
         FragmentManager fm = getChildFragmentManager();
@@ -131,4 +147,15 @@ public class QrcodeBodyFragment extends Fragment {
 
         return v;
     }
+
+    public void update() {
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd HH:mm");
+        String update = sdf.format(date);
+        if (time!=null) {
+            time.setText(update);
+        }
+    }
+
+
 }

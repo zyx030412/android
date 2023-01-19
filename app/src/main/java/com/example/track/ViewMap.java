@@ -17,8 +17,6 @@ import com.amap.api.navi.AmapNaviParams;
 import com.amap.api.navi.AmapNaviType;
 import com.amap.api.navi.AmapPageType;
 import com.amap.api.navi.model.AMapCarInfo;
-import com.amap.api.services.poisearch.PoiSearch;
-import com.amap.api.services.poisearch.PoiSearchV2;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,175 +1,369 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--约束布局-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
-    android:background="@color/white">
+    android:orientation="vertical"
+    android:background="@color/white"
+    >
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="200px">
+        <ImageButton
+            android:id="@+id/login_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/white"
+            android:src="@mipmap/back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
+        </ImageButton>
+<!--        分离同一水平的-->
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            />
+        <ImageButton
+            android:id="@+id/login_help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@color/white"
+            android:src="@mipmap/help"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
+        </ImageButton>
+    </LinearLayout>
+<!--layout_constraintLeft_toLeftOf 控件的左边和指定控件的左边对齐-->
 
-    <ImageButton
-        android:id="@+id/login_help"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:background="@color/white"
-        android:src="@mipmap/help"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
-
-    </ImageButton>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/constraintLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp">
-
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@mipmap/raspberry"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            ></ImageView>
+    </LinearLayout>
 
-        </ImageView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:padding="30dp"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="40dp">
-
-        <EditText
-            android:id="@+id/login_username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableBottom="@drawable/bottom_line"
-            android:hint=" 账号 / 手机号 / 邮箱"
-            android:textColor="@color/black"
-            android:textColorHint="@color/grey"
-            android:textSize="25dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="30dp" />
-
-        <EditText
-            android:id="@+id/login_password"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginTop="15dp"
-            android:drawableBottom="@drawable/bottom_line"
-            android:hint=" 密码"
-            android:textColor="@color/black"
-            android:textColorHint="@color/grey"
-            android:textSize="25dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.505"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_username" />
-
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        >
         <Button
-            android:id="@+id/login_forget"
+            android:id="@+id/login_codeLogin"
             style="?android:attr/borderlessButtonStyle"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:background="@color/white"
-            android:text="忘记密码"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="验证码登录"
+            android:textSize="20dp"
             android:textColor="@color/black"
-            android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="@+id/login_password"
             app:layout_constraintTop_toBottomOf="@+id/login_password">
 
         </Button>
+        <TextView
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"
+            android:text="|"
+            android:textSize="30dp"
+            >
+        </TextView>
 
         <Button
-            android:id="@+id/login_login"
-            android:layout_width="match_parent"
+            android:id="@+id/login_pwdLogin"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/retangle"
-            android:text="登录"
-            android:textColor="@color/white"
+            android:text="密码登录"
             android:textSize="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/login_forget"
-            tools:layout_editor_absoluteX="30dp" />
+            android:textColor="#0990FF"
+          >
 
-        <Button
-            android:id="@+id/login_register"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:background="@color/white"
-            android:text="立即注册"
+        </Button>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:id="@+id/login_codeLogin_linearLayout"
+        >
+        <RelativeLayout
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp">
+            <ImageView
+                android:id="@+id/tv_phone"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"
+                android:src="@mipmap/yonghu_urassic"
+                />
+            <!--android:background="@null"去除下划线-->
+            <EditText
+                android:id="@+id/login_phone"
+                android:maxLength="11"
+                android:maxLines="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="15dp"
+                android:layout_toEndOf="@id/tv_phone"
+                android:background="@null"
+                android:paddingStart="10dp"
+                android:inputType="number"
+                android:textColorHint="@color/grey"
+                android:hint="请输入手机号"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+            <!--    下划线-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="18.5dp"
+                android:layout_marginRight="18.5dp"
+                android:background="@color/black" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/view4"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp">
+            <ImageView
+                android:id="@+id/tv_code"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"
+                android:src="@mipmap/yanzhengma"
+                />
+            <!--android:background="@null"去除下划线-->
+            <EditText
+                android:id="@+id/Login_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLength="6"
+                android:maxLines="1"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="15dp"
+                android:layout_toEndOf="@id/tv_code"
+                android:background="@null"
+                android:paddingStart="10dp"
+                android:inputType="number"
+                android:textColorHint="@color/grey"
+                android:hint="请输入验证码"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/login_getCode"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:text="获取验证码"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="-140dp"
+                android:layout_toEndOf="@id/Login_code"
+                android:textColor="@color/a_blue"
+                android:background="@drawable/retangle2"
+                android:textSize="16sp"/>
+            <!--    下划线-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="18.5dp"
+                android:layout_marginRight="18.5dp"
+                android:background="@color/black" />
+        </RelativeLayout>
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="1.5dp"
+                android:background="#80686868"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/login_pwdLogin_linearLayout"
+        >
+        <RelativeLayout
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp">
+            <ImageView
+                android:id="@+id/tv_user"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"
+                android:src="@mipmap/yonghu_urassic"
+                />
+            <!--android:background="@null"去除下划线-->
+            <EditText
+                android:id="@+id/login_username"
+                android:maxLength="18"
+                android:maxLines="1"
+                android:text="18345264895"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="15dp"
+                android:layout_toEndOf="@id/tv_user"
+                android:background="@null"
+                android:paddingStart="10dp"
+                android:inputType="text"
+                android:textColorHint="@color/grey"
+                android:hint=" 账号 / 手机号 / 邮箱"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+            <!--    下划线-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="18.5dp"
+                android:layout_marginRight="18.5dp"
+                android:background="@color/black" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp">
+            <ImageView
+                android:id="@+id/tv_mima"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"
+                android:src="@mipmap/mima"
+                />
+            <!--android:background="@null"去除下划线-->
+            <EditText
+                android:id="@+id/login_password"
+                android:maxLength="15"
+                android:maxLines="1"
+                android:text="a123456789"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="15dp"
+                android:layout_toEndOf="@id/tv_mima"
+                android:background="@null"
+                android:paddingStart="10dp"
+                android:inputType="textPassword"
+                android:textColorHint="@color/grey"
+                android:hint="请输入密码"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+            <ImageView
+                android:id="@+id/iv_mima"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="-60dp"
+                android:layout_toEndOf="@id/login_password"
+                android:src="@mipmap/mimayincang"
+                />
+
+            <!--    下划线-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="18.5dp"
+                android:layout_marginRight="18.5dp"
+                android:background="@color/black" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/login_login"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/retangle3"
+        android:text="登录"
+        android:textSize="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/login_forget"
+        tools:layout_editor_absoluteX="30dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <TextView
+            android:id="@+id/Login_radio"
+            android:layout_marginLeft="1dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/radio_register"
+            android:layout_gravity="center"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="已阅读并同意账号"
             android:textColor="@color/black"
-            android:textSize="18dp"
-            app:layout_constraintStart_toStartOf="@+id/login_login"
-            app:layout_constraintTop_toBottomOf="@+id/login_login" />
+            android:textSize="20dp"
+            android:layout_marginLeft="15dp"/>
 
-        <Button
-            android:id="@+id/login_message_login"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:background="@color/white"
-            android:text="短信登录"
-            android:textColor="@color/black"
-            android:textSize="18dp"
-            app:layout_constraintEnd_toEndOf="@+id/login_login"
-            app:layout_constraintTop_toBottomOf="@+id/login_login" />
-
-
-        <ImageButton
-            android:id="@+id/login_qq_login"
+        <TextView
+            android:id="@+id/Login_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="144dp"
-            android:background="@color/white"
-            android:src="@mipmap/external_qq"
-            app:layout_constraintEnd_toStartOf="@+id/login_wechat_login"
-            app:layout_constraintStart_toStartOf="@+id/login_login"
-            app:layout_constraintTop_toBottomOf="@+id/login_login">
+            android:textSize="20dp"
+            android:textColor="@color/a_blue"
+            android:layout_gravity="center"
+            android:text="用户协议"
+            />
+    </LinearLayout>
 
-        </ImageButton>
-
-        <ImageButton
-            android:id="@+id/login_wechat_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="144dp"
-            android:background="@color/white"
-            android:src="@mipmap/wechat"
-            app:layout_constraintEnd_toEndOf="@+id/login_login"
-            app:layout_constraintStart_toStartOf="@+id/login_login"
-            app:layout_constraintTop_toBottomOf="@+id/login_login">
-
-        </ImageButton>
-
-        <ImageButton
-            android:id="@+id/login_alipay_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="144dp"
-            android:background="@color/white"
-            android:src="@mipmap/alipay"
-            app:layout_constraintEnd_toEndOf="@+id/login_login"
-            app:layout_constraintStart_toEndOf="@+id/login_wechat_login"
-            app:layout_constraintTop_toBottomOf="@+id/login_login">
-
-        </ImageButton>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/login_forget"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="忘记密码"
+        android:textColor="@color/black"
+        android:layout_marginTop="50dp"
+        android:textSize="20sp" />
+</LinearLayout>

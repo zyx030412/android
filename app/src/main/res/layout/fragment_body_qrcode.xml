@@ -83,7 +83,7 @@
             android:orientation="horizontal"
             android:layout_marginTop="5dp">
 
-            <Button
+            <TextView
                 android:id="@+id/qrcode_item1"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
@@ -91,10 +91,11 @@
                 android:background="@color/background_blue"
                 android:text="车辆状态"
                 android:textColor="@color/more_grey"
-                android:textSize="20dp"
-                android:layout_weight="1"/>
+                android:autoSizeTextType="uniform"
+                android:layout_weight="1"
+                android:padding="10dp"/>
 
-            <Button
+            <TextView
                 android:id="@+id/qrcode_item2"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
@@ -102,10 +103,11 @@
                 android:background="@color/background_blue"
                 android:text="我的行程"
                 android:textColor="@color/more_grey"
-                android:textSize="20dp"
-                android:layout_weight="1"/>
+                android:autoSizeTextType="uniform"
+                android:layout_weight="1"
+                android:padding="10dp"/>
 
-            <Button
+            <TextView
                 android:id="@+id/qrcode_item3"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
@@ -113,10 +115,11 @@
                 android:background="@color/background_blue"
                 android:text="车辆健康"
                 android:textColor="@color/more_grey"
-                android:textSize="20dp"
-                android:layout_weight="1"/>
+                android:autoSizeTextType="uniform"
+                android:layout_weight="1"
+                android:padding="10dp"/>
 
-            <Button
+            <TextView
                 android:id="@+id/qrcode_item4"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
@@ -124,9 +127,10 @@
                 android:background="@color/background_blue"
                 android:text="实时数据"
                 android:textColor="@color/more_grey"
-                android:textSize="20dp"
                 tools:ignore="MissingConstraints"
-                android:layout_weight="1" />
+                android:autoSizeTextType="uniform"
+                android:layout_weight="1"
+                android:padding="10dp" />
         </LinearLayout>
     </LinearLayout>
 

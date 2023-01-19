@@ -1,33 +1,35 @@
 package com.example.track.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.os.Bundle;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.AMap.OnMarkerClickListener;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.SupportMapFragment;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
-import com.amap.api.maps.AMap.OnMarkerClickListener;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.maps.model.Poi;
 import com.amap.api.navi.AMapNavi;
@@ -53,32 +55,27 @@ import com.amap.api.navi.model.NaviInfo;
 import com.amap.api.navi.model.NaviPoi;
 import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
-import com.amap.api.services.help.Tip;
-import com.amap.api.services.poisearch.PoiSearch.OnPoiSearchListener;
-
-import android.view.View.OnClickListener;
-import android.widget.Toast;
-
 import com.amap.api.services.core.PoiItem;
 import com.amap.api.services.core.SuggestionCity;
+import com.amap.api.services.help.Tip;
 import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
+import com.amap.api.services.poisearch.PoiSearch.OnPoiSearchListener;
 import com.example.track.InputTipsActivity;
 import com.example.track.MainActivity;
 import com.example.track.R;
-import com.example.track.entity.Trip;
-import com.example.track.model.PoiOverPlayModel;
 import com.example.track.entity.Constants;
 import com.example.track.entity.ToastUtil;
-import com.example.track.service.StoreService;
+import com.example.track.entity.Trip;
+import com.example.track.model.PoiOverPlayModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 public class NavigationFragment extends Fragment implements
-        AMap.OnMarkerClickListener, AMap.InfoWindowAdapter,
-        OnPoiSearchListener, View.OnClickListener {
+        OnMarkerClickListener, AMap.InfoWindowAdapter,
+        OnPoiSearchListener, OnClickListener {
     //声明AMapLocationClient类对象
     public AMapLocationClient mLocationClient = null;
     //声明定位回调监听器
@@ -105,7 +102,7 @@ public class NavigationFragment extends Fragment implements
     public static final int RESULT_CODE_INPUTTIPS = 101;
     public static final int RESULT_CODE_KEYWORDS = 102;
 
-    public AMap.OnMarkerClickListener mOnMarkerClickListener = new OnMarkerClickListener() {
+    public OnMarkerClickListener mOnMarkerClickListener = new OnMarkerClickListener() {
         @Override
         public boolean onMarkerClick(Marker marker) {
             relativeLayout.setVisibility(View.VISIBLE);

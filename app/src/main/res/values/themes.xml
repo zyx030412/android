@@ -1,5 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
+<!--    Theme主要是针对应用级别的或者说窗体级别，可以设置应用主题（应用换肤效果）和Activity的主题；主题是不能应用在某一个单独的View中；
+或者说Theme是用来设置应用全局主题风格的，对整个应用或某个Activity存在影响。-->
+<!--    从Theme和style的作用范围可以看出他们的区别；如果一个应用使用了theme，同时应用下的view也使用了style，那么当theme
+与样式style发生冲突时，style有效，因为style的优先级高于theme；在R.attr定义中以window开头的一些属性只对theme有效。-->
     <style name="Theme.Track" parent="Theme.AppCompat.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>

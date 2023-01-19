@@ -1,12 +1,9 @@
 package com.example.track.fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,9 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.track.R;
-import com.example.track.adapter.Item1Adapter;
 import com.example.track.adapter.Item2Adapter;
-import com.example.track.model.View.WaveView;
 
 public class QrcodeBodyItem2Fragment extends Fragment {
     RecyclerView mRecyclerView;

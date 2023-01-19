@@ -29,7 +29,7 @@
             android:id="@+id/index_body_fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
+<!--activity上面添加fragment-->
         </FrameLayout>
     </RelativeLayout>
 

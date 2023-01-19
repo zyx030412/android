@@ -3,6 +3,7 @@ package com.example.track.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import com.example.track.db.DemoDbSchema.DemoTable;
 
 public class DemoBaseHelper extends SQLiteOpenHelper {

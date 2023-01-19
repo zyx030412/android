@@ -1,31 +1,21 @@
 package com.example.track.fragment;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.track.MainActivity;
 import com.example.track.R;
 import com.example.track.adapter.Item1Adapter;
-import com.example.track.adapter.Item3RecycleViewAdapter;
 import com.example.track.entity.Item3;
 
 import java.util.ArrayList;
@@ -34,7 +24,7 @@ import java.util.List;
 public class QrcodeBodyItem1Fragment extends Fragment {
     private RecyclerView recyclerView;
     private List<Item3> item1List = new ArrayList<>();
-    private Button call,sos,fix,brake;
+    private TextView call,sos,fix,brake;
     private ImageButton call_img,sos_img,fix_img,brake_img;
     private ActivityResultLauncher mCallPermissionResultLauncher;//拨打电话处理
     private ActivityResultLauncher mSendPermissionResultLauncher;//发送短信处理

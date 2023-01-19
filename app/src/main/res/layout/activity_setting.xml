@@ -60,17 +60,21 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp">
 
-        <Button
+        <TextView
             android:id="@+id/setting_exit"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/exit_login"
             android:text="退出登录"
             android:textColor="@color/a_blue"
-            android:textSize="20dp"
+            android:autoSizeTextType="uniform"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="2dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_marginBottom="2dp"
             />
 
     </LinearLayout>

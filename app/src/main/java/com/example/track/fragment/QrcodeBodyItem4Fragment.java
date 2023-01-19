@@ -1,14 +1,11 @@
 package com.example.track.fragment;
 
 import android.graphics.Color;
-import android.media.MediaParser;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -19,8 +16,6 @@ import com.example.track.R;
 import com.example.track.model.View.CirStatisticGraph;
 import com.example.track.model.View.CurrentTemperatureView;
 import com.example.track.model.View.WaveView;
-
-import okhttp3.MediaType;
 
 public class QrcodeBodyItem4Fragment extends Fragment {
     private CirStatisticGraph cirStatisticGraph;

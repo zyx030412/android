@@ -41,24 +41,27 @@
             android:background="@color/white"
             android:layout_marginLeft="10dp"/>
 
-        <Button
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:background="@color/white"
             android:text="未知位置"
             style="?android:attr/borderlessButtonStyle"
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:autoSizeTextType="uniform"
+            android:padding="2dp"
             android:layout_marginLeft="5dp"
             />
 
         <TextView
             android:layout_width="72dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="停止中"
             android:textColor="@color/light_blue"
-            android:textSize="20dp"
-            android:layout_marginLeft="5dp"/>
+            android:autoSizeTextType="uniform"
+            android:padding="2dp"
+            android:layout_gravity="center"
+            android:gravity="center"/>
 
     </LinearLayout>
 
@@ -125,7 +128,7 @@
             android:background="@color/white"
             >
 
-            <Button
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -133,11 +136,12 @@
                 android:id="@+id/body_qrcode_item1_button_call"
                 style="?android:attr/borderlessButtonStyle"
                 android:src="@mipmap/call"
-                android:text="紧急联系人"
+                android:text="紧急联系"
                 android:textColor="@color/grey"
-                android:textSize="17dp" />
+                android:autoSizeTextType="uniform"
+                android:padding="3dp" />
 
-            <Button
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -147,8 +151,9 @@
                 style="?android:attr/borderlessButtonStyle"
                 android:text="呼叫救援"
                 android:textColor="@color/grey"
-                android:textSize="17dp" />
-            <Button
+                android:autoSizeTextType="uniform"
+                android:padding="3dp" />
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -158,17 +163,19 @@
                 android:text="维修查询"
                 android:id="@+id/body_qrcode_item1_button_fix"
                 android:textColor="@color/grey"
-                android:textSize="17dp" />
-            <Button
+                android:autoSizeTextType="uniform"
+                android:padding="3dp" />
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/white"
                 style="?android:attr/borderlessButtonStyle"
                 android:src="@mipmap/call"
-                android:text="紧急联系人"
+                android:text="紧急联系"
                 android:textColor="@color/grey"
-                android:textSize="17dp" />
+                android:autoSizeTextType="uniform"
+                android:padding="3dp"/>
 
 
         </LinearLayout>
